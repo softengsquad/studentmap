@@ -6,7 +6,6 @@
 - Supermarkets and other grocery shops
 - Favoriting system
 
-- Smart fridge compatability (lol)
 - Mobile device
 - Smart watch compatibility would be good
 - No need to include multiple devices at the same time
@@ -19,5 +18,6 @@
 - University bus route, include it if possible.
 	- Very useful for first years as it keeps it updated
 
-
+Navigation within buildings to find rooms - augmented reality for precise room navigation.
+uni bus timetables, e-scooter availabilities
 
