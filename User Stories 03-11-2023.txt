@@ -1,0 +1,23 @@
+
+- uni buildings are the priority.
+- Student hotspots are useful.
+- Club locations would be good.
+- Filter between different types of buildings. Social, night life and food
+- Supermarkets and other grocery shops
+- Favoriting system
+
+- Smart fridge compatability (lol)
+- Mobile device
+- Smart watch compatibility would be good
+- No need to include multiple devices at the same time
+
+- Fairly simple user interface
+- Keep it standardized for people coming from google maps
+
+- Implementing compatability with google calandars would be good for ease of use
+
+- University bus route, include it if possible.
+	- Very useful for first years as it keeps it updated
+
+
+
