@@ -1,8 +1,10 @@
-import 'package:counter_app/counter.dart';
-import 'package:test/test.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_test/flutter_test.dart';
+
+import 'package:studentmap/main.dart';
 
 void main() {
-    test("Test test", (), {
+  testWidgets('Test test', (WidgetTester tester) async {
 
-    });
+  });
 }
