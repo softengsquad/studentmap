@@ -21,7 +21,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Dart & Flutter
+      - name: Install Dart & Flutter
         uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.16.x'
