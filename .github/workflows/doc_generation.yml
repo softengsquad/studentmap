@@ -18,3 +18,5 @@ jobs:
       with:
         name: docs
         path: /tmp/docs
+
+      uses: actions/deploy-pages@v4
