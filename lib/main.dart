@@ -33,25 +33,17 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: MapView(),
-      )
-    );
+        appBar: AppBar(
+          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+          title: Text(widget.title),
+        ),
+        body: const Center(
+          child: MapView(),
+        ));
   }
 }
 
@@ -64,7 +56,7 @@ class MapView extends StatefulWidget {
 
 class MapViewState extends State<MapView> {
   final Completer<GoogleMapController> _controller =
-    Completer<GoogleMapController>();
+      Completer<GoogleMapController>();
 
   static const CameraPosition _kGooglePlex = CameraPosition(
     target: LatLng(50.79812, -1.09971),
