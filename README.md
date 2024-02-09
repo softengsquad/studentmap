@@ -1,5 +1,6 @@
 # Software Engineering Coursework
 
+Documentation is available [here](https://softengsquad.github.io/studentmap/).
 
 ## Team Members
 - 2107237 - Johan Kool
