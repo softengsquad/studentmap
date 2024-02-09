@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:studentmap/Domain%20Layer/Calandar%20Manager/session.dart';
+import 'package:studentmap/Domain-Layer/Calandar-Manager/session.dart';
 
 void main() {
   group("Session, Field Tests | ", () {
