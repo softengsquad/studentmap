@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:studentmap/Domain%20Layer/Calandar%20Manager/day.dart';
-import 'package:studentmap/Domain%20Layer/Calandar%20Manager/session.dart';
+import 'package:studentmap/domain_layer/calandar_manager/day.dart';
+import 'package:studentmap/domain_layer/calandar_manager/session.dart';
 
 void main() {
   group("Day, Field Tests | ", () {

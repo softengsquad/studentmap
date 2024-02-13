@@ -1,5 +1,5 @@
 import 'package:intl/intl.dart';
-import 'package:studentmap/Domain%20Layer/Calandar%20Manager/session.dart';
+import 'package:studentmap/domain_layer/calandar_manager/session.dart';
 
 /// Holds information about the sessions that are occurring this day.
 /// - Stores the date in **DateTime** Format.
