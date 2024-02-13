@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "354034818654",
+    "project_id": "studentmap-30af9",
+    "storage_bucket": "studentmap-30af9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:354034818654:android:2ed26e585fbb8303f55ecf",
+        "android_client_info": {
+          "package_name": "com.example.studentmap"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDsJh1l17tA-AX9KtSr2rPZ3jfKx0D3Mvg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
