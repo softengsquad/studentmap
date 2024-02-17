@@ -1,5 +1,3 @@
-import 'package:google_sign_in/google_sign_in.dart';
-
 /// The OAuth 2.0 Client ID given by Google Cloud.
 const String clientId = "662521222417-ki0ipll3nnsgsf0eeh82forng7ohognc.apps.googleusercontent.com";
 
@@ -12,9 +10,3 @@ const List<String> scopes = <String>[
   "https://www.googleapis.com/auth/calendar.events.owned.readonly",
 ];
 
-GoogleSignIn getGoogleSignIn() {
-  return GoogleSignIn(
-    clientId: clientId,
-    scopes: scopes,
-  );
-}
