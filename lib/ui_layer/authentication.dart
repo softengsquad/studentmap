@@ -39,7 +39,7 @@ class _GoogleSignInButton extends State<GoogleSignInButton> {
         }
       );
     } else {
-      return const Text("Signed in as {_currentUser.email}");
+      return Text("Signed in as ${_currentUser!.email}");
     }
   }
 
