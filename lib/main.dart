@@ -3,6 +3,8 @@ import "dart:async";
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
+import "/ui_layer/authentication.dart";
+
 void main() {
   runApp(const MyApp());
 }
@@ -42,7 +44,12 @@ class _MyHomePageState extends State<MyHomePage> {
           title: Text(widget.title),
         ),
         body: const Center(
-          child: MapView(),
+          child: Column(
+            children: <Widget>[
+              GoogleSignInButton(),
+              //MapView(),
+            ],
+          )
         ));
   }
 }
