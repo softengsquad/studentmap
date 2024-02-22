@@ -3,6 +3,9 @@ import "package:google_sign_in/google_sign_in.dart";
 
 import "/domain_layer/authenticator.dart";
 
+/// Creates a simple button to allow the user to sign in with Google.
+/// If the user is signed in, the button instead displays text stating
+/// the user's email address. 
 class GoogleSignInButton extends StatefulWidget {
   const GoogleSignInButton({super.key});
 
