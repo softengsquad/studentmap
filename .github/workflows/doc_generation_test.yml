@@ -15,4 +15,5 @@ jobs:
           flutter-version: '3.16.x'
           channel: 'stable'
 
+      - run: flutter pub get
       - run: dart doc --output=/tmp/docs
