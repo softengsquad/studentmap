@@ -1,5 +1,5 @@
-CREATE TABLE IF NOT EXISTS building(
-    building_id INT NOT NULL PRIMARY KEY,
+CREATE TABLE building(
+    building_id INTEGER PRIMARY KEY,
     name VARCHAR(32) NOT NULL,
     longitude DECIMAL NOT NULL,
     latitude DECIMAL NOT NULL,
