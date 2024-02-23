@@ -6,6 +6,7 @@ on:
       - 'master'
       - 'SOF-45'
 
+
 permissions:
   contents: read
   pages: write
