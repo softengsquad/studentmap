@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - 'master'
+      - 'SOF-45'
 
 permissions:
   contents: read
