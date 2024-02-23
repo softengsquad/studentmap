@@ -30,17 +30,17 @@ jobs:
       - run: dart doc --output=/tmp/docs
 
       - name: Setup Pages
-        if: github.ref == "refs/heads/master"
+        if: github.ref == 'refs/heads/master'
         uses: actions/configure-pages@v4
 
       - name: Upload artifact
-        if: github.ref == "refs/heads/master"
+        if: github.ref == 'refs/heads/master'
         uses: actions/upload-pages-artifact@v3
         with:
           path: '/tmp/docs'
 
       - name: Deploy to GitHub Pages
-        if: github.ref == "refs/heads/master"
+        if: github.ref == 'refs/heads/master'
         id: deployment
         uses: actions/deploy-pages@v4
 
