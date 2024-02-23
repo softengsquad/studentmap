@@ -12,6 +12,7 @@ class Building{
     final String addressLine2;
     final String postcode;
     final String type; // The building type 
+    final bool favourited; 
   
     Building({
       required this.id,
@@ -19,6 +20,7 @@ class Building{
       required this.addressLine1,
       required this.addressLine2,
       required this.postcode,
-      required this.type
+      required this.type,
+      required this.favourited
     });
 }
