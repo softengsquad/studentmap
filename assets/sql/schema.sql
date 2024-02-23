@@ -3,5 +3,5 @@ CREATE TABLE IF NOT EXISTS building(
     name VARCHAR(32) NOT NULL,
     longitude DECIMAL NOT NULL,
     latitude DECIMAL NOT NULL,
-    favourite INTEGER (CHECK favourite == 0 OR favourite == 1)
+    favourite INTEGER NOT NULL CHECK (favourite IN (0, 1))
 );
