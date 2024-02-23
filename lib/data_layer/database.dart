@@ -9,7 +9,7 @@ class Database {
     Database(this._internalDb);
 
     /// Opens a connection to the local database.
-    Future<Database> open() async {
+    static Future<Database> open() async {
         var internalDb = await sqflite.openDatabase("studentmap.db");
         internalDb.execute(await _getSchemaSql());
 
