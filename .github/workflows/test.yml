@@ -11,4 +11,4 @@ jobs:
       with:
         flutter-version: '3.16.x'
         channel: 'stable'
-    - run: flutter test
+    - run: flutter test && dart doc
