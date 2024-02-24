@@ -1,5 +1,6 @@
 import "package:flutter/services.dart" show rootBundle;
 import "package:sqflite/sqflite.dart" as sqflite;
+import "/domain_layer/building_manager/building.dart";
 
 /// Describes a local database used to store various information
 /// pertraining to buildings, bus routes, favourites, etc.
@@ -23,6 +24,8 @@ class Database {
             _internalDb.execute(await _getSchemaSql());
             _internalDb.execute(await _getPopulateSql());
         }
+
+        getAllBuildings();
     }
 
     Future<String> _getSchemaSql() async {
@@ -49,5 +52,39 @@ class Database {
     /// See getTableCount()
     Future<bool> isDatabaseEmpty() async {
         return await getTableCount() <= 0;
+    }
+
+    /// Retrieves all buildings from the database and converts
+    /// them into classes of type Building.
+    Future<List<Building>> getAllBuildings() async {
+        var res = await _internalDb.query(
+            "building",
+            columns: [
+                "building_id",
+                "name",
+                "addressline1",
+                "addressline2",
+                "postcode",
+                "type",
+                "favourited"
+            ],
+        );
+
+        List<Building> buildings = [];
+
+        for (var row in res) {
+            buildings.add(Building(
+                id: row["building_id"] as int,
+                name: row["name"] as String,
+                addressLine1: row["addressline1"] as String,
+                addressLine2: row["addressline2"] != null
+                    ? row["addressline2"] as String : "",
+                postcode: row["postcode"] as String,
+                type: row["type"] as String,
+                favourited: row["favourited"] == 1 ? true : false,
+            ));
+        }
+
+        return buildings;
     }
 }
