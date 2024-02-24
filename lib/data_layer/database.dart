@@ -66,6 +66,8 @@ class Database {
                 "addressline2",
                 "postcode",
                 "type",
+                "longitude",
+                "latitude",
                 "favourited"
             ],
         );
@@ -82,6 +84,8 @@ class Database {
                 postcode: row["postcode"] as String,
                 type: row["type"] as String,
                 favourited: row["favourited"] == 1 ? true : false,
+                longitude: row["longitude"] as double,
+                latitude: row["latitude"] as double,
             ));
         }
 
