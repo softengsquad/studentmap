@@ -1,3 +1,4 @@
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 /// Holds information about the building types. This object
 /// is to be used when fetching information from the **database**.
@@ -12,7 +13,11 @@ class Building{
     final String addressLine2;
     final String postcode;
     final String type; // The building type 
-    final bool favourited; 
+    final bool favourited;
+
+    // For storing information about position on Google Maps
+    double longitude;
+    double latitude;
   
     Building({
       required this.id,
@@ -21,6 +26,11 @@ class Building{
       required this.addressLine2,
       required this.postcode,
       required this.type,
-      required this.favourited
+      required this.favourited,
+      required this.latitude,
+      required this.longitude
     });
+
+    /// Returns the position of this building
+    LatLng getPosition() => LatLng(latitude, longitude);
 }
