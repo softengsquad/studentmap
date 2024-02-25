@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import "/ui_layer/authentication.dart";
+import "/ui_layer/mapdrawer.dart";
 import "/data_layer/database.dart";
 
 void main() {
@@ -53,7 +54,9 @@ class _MyHomePageState extends State<MyHomePage> {
               //MapView(),
             ],
           )
-        ));
+        ),
+        drawer: const MapDrawer(),
+      );
   }
 }
 
