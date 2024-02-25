@@ -1,6 +1,9 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:provider/provider.dart';
+import "/domain_layer/building_manager/building.dart";
+import "/data_layer/database.dart";
 
 class InteractiveMap extends StatefulWidget {
   const InteractiveMap({super.key});
@@ -14,21 +17,52 @@ class _InteractiveMap extends State<InteractiveMap> {
       Completer<GoogleMapController>();
 
   static const CameraPosition _kGooglePlex = CameraPosition(
-    target: LatLng(50.79812, -1.09971),
-    zoom: 16.5,
+    target: LatLng(50.79812, -1.09571),
+    zoom: 15,
   );
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: GoogleMap(
-        mapType: MapType.normal,
-        initialCameraPosition: _kGooglePlex,
-        onMapCreated: (GoogleMapController controller) {
-          _controller.complete(controller);
-        },
-      ),
+    var db = context.read<Database>();
+
+    return FutureBuilder(
+      future: db.getAllBuildings(),
+      builder: (BuildContext context, AsyncSnapshot<List<Building>> snapshot) {
+        if (snapshot.hasData) {
+          return Scaffold(
+            body: GoogleMap(
+            mapType: MapType.normal,
+            initialCameraPosition: _kGooglePlex,
+            circles: buildingCircles(snapshot.data!),
+            onMapCreated: (GoogleMapController controller) {
+              _controller.complete(controller);
+            },
+          ),
+        );
+        } else {
+          return const SizedBox(
+            width: 60,
+            height: 60,
+            child: CircularProgressIndicator(),
+          );
+        }
+      }
     );
+  }
+
+  Set<Circle> buildingCircles(List<Building> buildings) {
+    var set = <Circle>{};
+
+    for (var b in buildings) {
+      set.add(Circle(
+        circleId: CircleId(b.id.toString()),
+        center: b.getPosition(),
+        radius: 30,
+        strokeWidth: 4,
+      ));
+    }
+
+    return set;
   }
 }
 

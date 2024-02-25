@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import "/ui_layer/map.dart";
 import "/ui_layer/authentication.dart";
@@ -37,23 +38,40 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    var db = Database.open().then((v) {});
-
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-          title: Text(widget.title),
-        ),
-        body: const Center(
-          child: Column(
-            children: <Widget>[
-              GoogleSignInButton(),
-              SizedBox(
-                height: 600,
-                child: InteractiveMap(),
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        title: Text(widget.title),
+      ),
+      body: FutureBuilder<Database>(
+        future: Database.open(),
+        builder: (BuildContext context, AsyncSnapshot<Database> snapshot) {
+          if (snapshot.hasData) {
+            Database db = snapshot.data!;
+
+            return Provider(
+              create: (_) => db,
+              child: const Center(
+                child: Column(
+                  children: <Widget>[
+                    GoogleSignInButton(),
+                    SizedBox(
+                      height: 600,
+                      child: InteractiveMap(),
+                    )
+                  ],
+                )
               )
-            ],
-          )
-        ));
+            );
+          } else {
+            return const SizedBox(
+              width: 60,
+              height: 60,
+              child: CircularProgressIndicator(),
+            );
+          }
+        }
+      )
+    );
   }
 }
