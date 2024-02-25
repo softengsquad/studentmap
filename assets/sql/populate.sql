@@ -5,8 +5,8 @@ INSERT INTO building
         addressline2,
         postcode,
         type,
-        longitude,
         latitude,
+        longitude,
         favourited
     )
 VALUES
