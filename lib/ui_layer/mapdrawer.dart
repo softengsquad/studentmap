@@ -9,7 +9,16 @@ class MapDrawer extends StatelessWidget {
     return Drawer(
       child: ListView(
         children: const <Widget>[
-          GoogleSignInButton(),
+          DrawerHeader(
+            decoration: BoxDecoration(
+              color: Colors.blue,
+            ),
+            child: SizedBox(),
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 32),
+            child: GoogleSignInButton(),
+          ),
         ],
       ),
     );
