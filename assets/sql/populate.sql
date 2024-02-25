@@ -15,7 +15,7 @@ VALUES
     'Portland Street',
     NULL,
     'PO13DE',
-    'UNI',
+    'uni',
     50.7981248012259,
     -1.0994962047794432,
     FALSE

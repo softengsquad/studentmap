@@ -59,10 +59,24 @@ class _InteractiveMap extends State<InteractiveMap> {
         center: b.getPosition(),
         radius: 30,
         strokeWidth: 4,
+        strokeColor: colorForBuilding(b),
       ));
     }
 
     return set;
+  }
+
+  Color colorForBuilding(Building building) {
+    switch (building.type.toLowerCase()) {
+      case "uni":
+        return Colors.red;
+      case "mark":
+        return Colors.blue;
+      case "soc":
+        return Colors.yellow;
+      default:
+        return Colors.black;
+    }
   }
 }
 
