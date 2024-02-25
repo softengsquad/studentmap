@@ -1,4 +1,5 @@
-import 'package:flutter/material.dart';
+import "package:flutter/material.dart";
+import "/ui_layer/authentication.dart";
 
 class MapDrawer extends StatelessWidget {
   const MapDrawer({super.key});
@@ -7,7 +8,8 @@ class MapDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Drawer(
       child: ListView(
-        children: <Widget>[
+        children: const <Widget>[
+          GoogleSignInButton(),
         ],
       ),
     );

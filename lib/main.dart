@@ -48,12 +48,7 @@ class _MyHomePageState extends State<MyHomePage> {
           title: Text(widget.title),
         ),
         body: const Center(
-          child: Column(
-            children: <Widget>[
-              GoogleSignInButton(),
-              //MapView(),
-            ],
-          )
+          child: MapView(),
         ),
         drawer: const MapDrawer(),
       );
