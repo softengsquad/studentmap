@@ -36,7 +36,7 @@ class _GoogleSignInButton extends State<GoogleSignInButton> {
   Widget build(context) {
     if (_currentUser == null) {
       return ElevatedButton(
-        child: const Text("Sign in"),
+        child: const Text("Google Sign In"),
         onPressed: () {
           trySignIn();
         }
