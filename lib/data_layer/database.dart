@@ -1,5 +1,6 @@
 import "package:flutter/services.dart" show rootBundle;
 import "package:sqflite/sqflite.dart" as sqflite;
+import "/util.dart";
 import "/domain_layer/building_manager/building.dart";
 
 /// Describes a local database used to store various information
@@ -11,12 +12,18 @@ class Database {
 
     /// Opens a connection to the local database.
     static Future<Database> open() async {
-        var internalDb = await sqflite.openDatabase("studentmap.db");
+        var internalDb = await sqflite.openDatabase(_getDatabaseName());
 
         var db = Database(internalDb);
         await db._init();
 
         return db;
+    }
+
+    /// Returns the local file name of the database. A different filename is
+    /// returned when in testing mode, as given by isTesting().
+    static String _getDatabaseName() {
+        return isTesting() ? "studentmap.db" : "studentmap_testing.db";
     }
 
     Future<void> _init() async {
