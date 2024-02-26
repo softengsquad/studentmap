@@ -12,7 +12,14 @@ class Database {
 
     /// Opens a connection to the local database.
     static Future<Database> open() async {
-        var internalDb = await sqflite.openDatabase(_getDatabaseName());
+        var dbName = _getDatabaseName();
+
+        // Start with a fresh database for each test case
+        if (isTesting()) {
+            await sqflite.deleteDatabase(dbName);
+        }
+
+        var internalDb = await sqflite.openDatabase(dbName);
 
         var db = Database(internalDb);
         await db._init();
@@ -33,8 +40,6 @@ class Database {
             _internalDb.execute(await _getSchemaSql());
             _internalDb.execute(await _getPopulateSql());
         }
-
-        getAllBuildings();
     }
 
     /// Returns the SQL code used to construct the tables within the datbase.
