@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import "/domain_layer/building_manager/building.dart";
 import "/data_layer/database.dart";
 
+/// Describes an interactive map that is used to display buildings and routes.
 class InteractiveMap extends StatefulWidget {
   const InteractiveMap({super.key});
 
@@ -50,6 +51,8 @@ class _InteractiveMap extends State<InteractiveMap> {
     );
   }
 
+  /// Transfosms a list of buildings into a set of Circles to be drawn
+  /// on the interactive map.
   Set<Circle> buildingCircles(List<Building> buildings) {
     var set = <Circle>{};
 
@@ -66,6 +69,7 @@ class _InteractiveMap extends State<InteractiveMap> {
     return set;
   }
 
+  /// Returns the colour for a building based on its type.
   Color colorForBuilding(Building building) {
     switch (building.type.toLowerCase()) {
       case "uni":
