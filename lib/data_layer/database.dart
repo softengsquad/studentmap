@@ -26,6 +26,8 @@ class Database {
         return isTesting() ? "studentmap.db" : "studentmap_testing.db";
     }
 
+    /// Initializes the database by executing the schema SQL and populating
+    /// the database with initial data.
     Future<void> _init() async {
         if (await isDatabaseEmpty()) {
             _internalDb.execute(await _getSchemaSql());
@@ -35,10 +37,12 @@ class Database {
         getAllBuildings();
     }
 
+    /// Returns the SQL code used to construct the tables within the datbase.
     Future<String> _getSchemaSql() async {
         return await rootBundle.loadString("assets/sql/schema.sql");
     }
 
+    /// Returns the SQL code used to populate the database with initial data.
     Future<String> _getPopulateSql() async {
         return await rootBundle.loadString("assets/sql/populate.sql");
     }
