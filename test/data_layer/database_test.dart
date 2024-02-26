@@ -6,11 +6,18 @@ void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   databaseFactory = databaseFactoryFfi;
 
-  group("Database tests", () {
-    test("Database contains tables after initialization", () async {
+  group("Database", () {
+    test("contains tables after initialization", () async {
       var db = await Database.open();
 
       assert(!await db.isDatabaseEmpty());
+    });
+
+    test("contains buildings in table", () async {
+      var db = await Database.open();
+      var buildings = await db.getAllBuildings();
+
+      assert(buildings.isNotEmpty);
     });
   });
 }
