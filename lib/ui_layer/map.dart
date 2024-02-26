@@ -57,7 +57,7 @@ class _InteractiveMap extends State<InteractiveMap> {
       set.add(Circle(
         circleId: CircleId(b.id.toString()),
         center: b.getPosition(),
-        radius: 30,
+        radius: 16,
         strokeWidth: 4,
         strokeColor: colorForBuilding(b),
       ));
