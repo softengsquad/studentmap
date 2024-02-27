@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import "/ui_layer/map.dart";
 import "/ui_layer/authentication.dart";
+import "/ui_layer/mapdrawer.dart";
 import "/data_layer/database.dart";
 
 void main() {
@@ -15,12 +16,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: "Student Map",
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(title: "Student Map"),
     );
   }
 }
@@ -35,14 +36,16 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   @override
   Widget build(BuildContext context) {
+    Database.open().then((v) {});
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
       ),
+      drawer: const MapDrawer(),
       body: FutureBuilder<Database>(
         future: Database.open(),
         builder: (BuildContext context, AsyncSnapshot<Database> snapshot) {
@@ -52,15 +55,7 @@ class _MyHomePageState extends State<MyHomePage> {
             return Provider(
               create: (_) => db,
               child: const Center(
-                child: Column(
-                  children: <Widget>[
-                    GoogleSignInButton(),
-                    SizedBox(
-                      height: 600,
-                      child: InteractiveMap(),
-                    )
-                  ],
-                )
+                child: InteractiveMap(),
               )
             );
           } else {
