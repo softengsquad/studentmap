@@ -98,7 +98,7 @@ class Database {
                 addressLine2: row["addressline2"] != null
                     ? row["addressline2"] as String : "",
                 postcode: row["postcode"] as String,
-                type: row["type"] as String,
+                type: (row["type"] as String).toLowerCase(),
                 favourited: row["favourited"] == 1 ? true : false,
                 longitude: row["longitude"] as double,
                 latitude: row["latitude"] as double,
