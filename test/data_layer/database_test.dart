@@ -12,12 +12,26 @@ void main() {
 
       assert(!await db.isDatabaseEmpty());
     });
+  });
 
-    test("contains buildings in table", () async {
+  group("Database buildings", () {
+    test("table is not empty", () async {
       var db = await Database.open();
       var buildings = await db.getAllBuildings();
 
       assert(buildings.isNotEmpty);
+    });
+
+    test("first building row is valid", () async {
+      var db = await Database.open();
+      var buildings = await db.getAllBuildings();
+
+      var b1 = buildings.first;
+
+      assert(b1.id == 1);
+      assert(b1.name == "Richmond Building");
+      assert(b1.type == "uni");
+      assert(!b1.favourited);
     });
   });
 }
