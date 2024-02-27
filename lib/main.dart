@@ -3,7 +3,7 @@ import "dart:async";
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-import "/ui_layer/authentication.dart";
+import "/ui_layer/mapdrawer.dart";
 import "/data_layer/database.dart";
 
 void main() {
@@ -16,12 +16,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: "Student Map",
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(title: "Student Map"),
     );
   }
 }
@@ -39,7 +39,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    var db = Database.open().then((v) {});
+    Database.open().then((v) {});
 
     return Scaffold(
         appBar: AppBar(
@@ -47,13 +47,10 @@ class _MyHomePageState extends State<MyHomePage> {
           title: Text(widget.title),
         ),
         body: const Center(
-          child: Column(
-            children: <Widget>[
-              GoogleSignInButton(),
-              //MapView(),
-            ],
-          )
-        ));
+          child: MapView(),
+        ),
+        drawer: const MapDrawer(),
+      );
   }
 }
 
