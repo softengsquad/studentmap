@@ -6,7 +6,7 @@ void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   databaseFactory = databaseFactoryFfi;
 
-  group("Database tests", () {
+  group("Database tests |", () {
     test("Database contains tables after initialization", () async {
       var db = await Database.open();
 
