@@ -8,10 +8,19 @@ class BuildingInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Row(
       children: <Widget>[
-        Text(building.name),
-      ]
+        Column(
+          children: <Widget>[
+            Text(building.name),
+            Text("${building.addressLine1}, ${building.addressLine2}"),
+            Text(building.postcode),
+          ],
+        ),
+        const Column(
+          children: <Widget>[],
+        ),
+      ],
     );
   }
 }
