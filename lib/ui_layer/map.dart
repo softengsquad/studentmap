@@ -27,28 +27,28 @@ class _InteractiveMap extends State<InteractiveMap> {
     var db = context.read<Database>();
 
     return FutureBuilder(
-      future: db.getAllBuildings(),
-      builder: (BuildContext context, AsyncSnapshot<List<Building>> snapshot) {
-        if (snapshot.hasData) {
-          return Scaffold(
-            body: GoogleMap(
-            mapType: MapType.normal,
-            initialCameraPosition: _kGooglePlex,
-            circles: buildingCircles(snapshot.data!),
-            onMapCreated: (GoogleMapController controller) {
-              _controller.complete(controller);
-            },
-          ),
-        );
-        } else {
-          return const SizedBox(
-            width: 60,
-            height: 60,
-            child: CircularProgressIndicator(),
-          );
-        }
-      }
-    );
+        future: db.getAllBuildings(),
+        builder:
+            (BuildContext context, AsyncSnapshot<List<Building>> snapshot) {
+          if (snapshot.hasData) {
+            return Scaffold(
+              body: GoogleMap(
+                mapType: MapType.normal,
+                initialCameraPosition: _kGooglePlex,
+                circles: buildingCircles(snapshot.data!),
+                onMapCreated: (GoogleMapController controller) {
+                  _controller.complete(controller);
+                },
+              ),
+            );
+          } else {
+            return const SizedBox(
+              width: 60,
+              height: 60,
+              child: CircularProgressIndicator(),
+            );
+          }
+        });
   }
 
   /// Transfosms a list of buildings into a set of Circles to be drawn
@@ -83,4 +83,3 @@ class _InteractiveMap extends State<InteractiveMap> {
     }
   }
 }
-

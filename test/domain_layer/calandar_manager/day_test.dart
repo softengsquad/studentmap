@@ -4,7 +4,6 @@ import 'package:studentmap/domain_layer/calandar_manager/session.dart';
 
 void main() {
   group("Day, Field Tests | ", () {
-    
     test("Date initializes to '12th Feburary, 2012'", () {
       // Arrange
       DateTime date = DateTime(2012, 2, 12);
@@ -13,7 +12,7 @@ void main() {
       Day testObj = Day(date, []);
 
       // Assert
-      expect(DateTime(2012 ,2, 12), testObj.date);
+      expect(DateTime(2012, 2, 12), testObj.date);
     });
 
     test("Weekday initializes to 'Sunday'", () {
@@ -27,10 +26,14 @@ void main() {
       expect("Sunday", testObj.weekDay);
     });
 
-    test("Sessions initilaizes to ['Programming, 12am - 1pm, Liongate (0.14)']", () {
+    test("Sessions initilaizes to ['Programming, 12am - 1pm, Liongate (0.14)']",
+        () {
       // Arrange
       DateTime date = DateTime(2012, 2, 12);
-      List<Session> sessions = [Session("Programming", DateTime(2012, 4, 1, 12), DateTime(2012, 4, 2, 13), "Liongate", "0.14")];
+      List<Session> sessions = [
+        Session("Programming", DateTime(2012, 4, 1, 12),
+            DateTime(2012, 4, 2, 13), "Liongate", "0.14")
+      ];
 
       // Act
       Day testObj = Day(date, sessions);
@@ -41,18 +44,25 @@ void main() {
   });
 
   group("Day, Method Tests | ", () {
-    
-    test("getSchedule returns '['Programming, 12am - 1pm, Liongate (0.14)', 'Networks, 2pm - 3pm, Portland (1.19)']'", () {
+    test(
+        "getSchedule returns '['Programming, 12am - 1pm, Liongate (0.14)', 'Networks, 2pm - 3pm, Portland (1.19)']'",
+        () {
       // Arrange
       DateTime date = DateTime(2012, 2, 12);
-      List<Session> sessions = [Session("Programming", DateTime(2012, 4, 1, 12), DateTime(2012, 4, 2, 13), "Liongate", "0.14"),
-                                Session("Networks", DateTime(2012, 4, 1, 14), DateTime(2012, 4, 2, 15), "Portland", "1.19")];
+      List<Session> sessions = [
+        Session("Programming", DateTime(2012, 4, 1, 12),
+            DateTime(2012, 4, 2, 13), "Liongate", "0.14"),
+        Session("Networks", DateTime(2012, 4, 1, 14), DateTime(2012, 4, 2, 15),
+            "Portland", "1.19")
+      ];
       // Act
       Day testObj = Day(date, sessions);
 
       // Assert
-      expect(['Programming, 12am - 1pm, Liongate (0.14)','Networks, 2pm - 3pm, Portland (1.19)'], testObj.getSchedule());
+      expect([
+        'Programming, 12am - 1pm, Liongate (0.14)',
+        'Networks, 2pm - 3pm, Portland (1.19)'
+      ], testObj.getSchedule());
     });
   });
-
 }

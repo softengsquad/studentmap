@@ -4,10 +4,10 @@ import 'package:studentmap/domain_layer/calandar_manager/session.dart';
 void main() {
   group("Session, Field Tests | ", () {
     test("Name is initialized to 'Programming'", () {
-      
       // Arrange
       String sessionName = "Programming";
-      DateTime start = DateTime(2012, 4, 1, 12); // Format {Year, Month, Day, Hour}
+      DateTime start =
+          DateTime(2012, 4, 1, 12); // Format {Year, Month, Day, Hour}
       DateTime end = DateTime(2012, 4, 2, 13);
       String building = "Liongate";
       String room = "0.14";
@@ -20,10 +20,10 @@ void main() {
     });
 
     test("Start is initialized to 12am", () {
-      
       // Arrange
       String sessionName = "Programming";
-      DateTime start = DateTime(2012, 4, 1, 12); // Format {Year, Month, Day, Hour}
+      DateTime start =
+          DateTime(2012, 4, 1, 12); // Format {Year, Month, Day, Hour}
       DateTime end = DateTime(2012, 4, 2, 13);
       String building = "Liongate";
       String room = "0.14";
@@ -36,10 +36,10 @@ void main() {
     });
 
     test("End is initialized to 1pm", () {
-      
       // Arrange
       String sessionName = "Programming";
-      DateTime start = DateTime(2012, 4, 1, 12); // Format {Year, Month, Day, Hour}
+      DateTime start =
+          DateTime(2012, 4, 1, 12); // Format {Year, Month, Day, Hour}
       DateTime end = DateTime(2012, 4, 2, 13);
       String building = "Liongate";
       String room = "0.14";
@@ -52,10 +52,10 @@ void main() {
     });
 
     test("Building is initialized to 'Liongate'", () {
-      
       // Arrange
       String sessionName = "Programming";
-      DateTime start = DateTime(2012, 4, 1, 12); // Format {Year, Month, Day, Hour}
+      DateTime start =
+          DateTime(2012, 4, 1, 12); // Format {Year, Month, Day, Hour}
       DateTime end = DateTime(2012, 4, 2, 13);
       String building = "Liongate";
       String room = "0.14";
@@ -68,10 +68,10 @@ void main() {
     });
 
     test("Room is initialized to '0.14'", () {
-      
       // Arrange
       String sessionName = "Programming";
-      DateTime start = DateTime(2012, 4, 1, 12); // Format {Year, Month, Day, Hour}
+      DateTime start =
+          DateTime(2012, 4, 1, 12); // Format {Year, Month, Day, Hour}
       DateTime end = DateTime(2012, 4, 2, 13);
       String building = "Liongate";
       String room = "0.14";
@@ -85,12 +85,12 @@ void main() {
   });
 
   group("Session, Method Tests | ", () {
-    
-    test("getSessionString returns 'Programming, 12am - 1pm, Liongate (0.14)'", () {
-      
+    test("getSessionString returns 'Programming, 12am - 1pm, Liongate (0.14)'",
+        () {
       // Arrange
       String sessionName = "Programming";
-      DateTime start = DateTime(2012, 4, 1, 12); // Format {Year, Month, Day, Hour}
+      DateTime start =
+          DateTime(2012, 4, 1, 12); // Format {Year, Month, Day, Hour}
       DateTime end = DateTime(2012, 4, 2, 13);
       String building = "Liongate";
       String room = "0.14";
