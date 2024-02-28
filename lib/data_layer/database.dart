@@ -1,6 +1,6 @@
 import "package:flutter/services.dart" show rootBundle;
 import "package:sqflite/sqflite.dart" as sqflite;
-import "/util.dart";
+import "../util.dart";
 import "/domain_layer/building_manager/building.dart";
 
 /// Describes a local database used to store various information
