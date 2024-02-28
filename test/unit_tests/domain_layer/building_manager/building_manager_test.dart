@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter_test/flutter_test.dart';
 import 'package:studentmap/domain_layer/building_manager/building.dart';
 import 'package:studentmap/domain_layer/building_manager/building_manager.dart';
@@ -159,8 +157,7 @@ void main() {
       expect(3, output.length);
     });
 
-    test(
-        "getMatchingBuildingsByName gives output of length 3 for input 'B'",
+    test("getMatchingBuildingsByName gives output of length 3 for input 'B'",
         () {
       // Arrange
       List<Building> buildings = [
@@ -207,8 +204,7 @@ void main() {
       expect(3, output.length);
     });
 
-    test(
-        "getMatchingBuildingsByName gives output of length 3 for input 'uil'",
+    test("getMatchingBuildingsByName gives output of length 3 for input 'uil'",
         () {
       // Arrange
       List<Building> buildings = [
@@ -351,9 +347,7 @@ void main() {
       expect([], output);
     });
 
-    test(
-        "getMatchingBuildingsByName gives output [] for null input",
-        () {
+    test("getMatchingBuildingsByName gives output [] for null input", () {
       // Arrange
       List<Building> buildings = [
         Building(
@@ -398,6 +392,5 @@ void main() {
       // Assert
       expect([], output);
     });
-
   });
 }

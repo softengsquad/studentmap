@@ -3,13 +3,17 @@ import 'package:studentmap/utility/validator.dart';
 
 void main() {
   group('Validator Method Tests |', () {
-    
     test('validateStringInput - "validInput"  return true', () {
       expect(Validator.validateStringInput("validInput"), true);
     });
-    
-    test('validateStringInput - "VeryLongInputThatMakesNoSenseAtAllAndIsOnlyHereToStressTheValidationMethodToSeeIfItWillBreakWhenUsingAnExceptionallyLongInput"  return true', () {
-      expect(Validator.validateStringInput("VeryLongInputThatMakesNoSenseAtAllAndIsOnlyHereToStressTheValidationMethodToSeeIfItWillBreakWhenUsingAnExceptionallyLongInput"), true);
+
+    test(
+        'validateStringInput - "VeryLongInputThatMakesNoSenseAtAllAndIsOnlyHereToStressTheValidationMethodToSeeIfItWillBreakWhenUsingAnExceptionallyLongInput"  return true',
+        () {
+      expect(
+          Validator.validateStringInput(
+              "VeryLongInputThatMakesNoSenseAtAllAndIsOnlyHereToStressTheValidationMethodToSeeIfItWillBreakWhenUsingAnExceptionallyLongInput"),
+          true);
     });
 
     test(

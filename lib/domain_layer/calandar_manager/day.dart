@@ -8,7 +8,7 @@ class Day {
   DateTime date;
   late String weekDay; // When it is in the week
   late List<Session> sessions;
-  
+
   Day(this.date, this.sessions) {
     weekDay = _getWeekDay();
   }
@@ -17,5 +17,6 @@ class Day {
   String _getWeekDay() => DateFormat('EEEE').format(date);
 
   /// Returns a **List** Of session Strings
-  List<String> getSchedule() => [for(Session session in sessions) session.getSessionString()];
+  List<String> getSchedule() =>
+      [for (Session session in sessions) session.getSessionString()];
 }

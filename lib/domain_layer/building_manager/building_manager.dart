@@ -12,7 +12,6 @@ class BuildingManager {
   /// Returns buildings that contain a search term
   /// defined in  **Input**.
   List<Building> getMatchingBuildingsByName(String? input) {
-    
     // Guard Clause to remove illegal inputs
     if (!Validator.validateStringInput(input)) {
       //TODO: Add some feedback for the user that will tell them why an input is invalid
