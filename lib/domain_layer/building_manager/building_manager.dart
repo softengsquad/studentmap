@@ -15,6 +15,7 @@ class BuildingManager {
     
     // Guard Clause to remove illegal inputs
     if (!Validator.validateStringInput(input)) {
+      //TODO: Add some feedback for the user that will tell them why an input is invalid
       return [];
     }
 
