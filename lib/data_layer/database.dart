@@ -108,7 +108,7 @@ class Database {
   }
 
   Future<void> updateFavouriteStatus(int id, bool fave) async {
-    await _internalDb.update("building", {"favourited": fave},
+    await _internalDb.update("building", {"favourited": fave ? 1 : 0},
         where: "building_id = $id");
   }
 }
