@@ -31,4 +31,7 @@ class Building {
 
   /// Returns the position of this building
   LatLng getPosition() => LatLng(latitude, longitude);
+
+  /// Returns the name of the building in **Lower Case**
+  String getName() => name.toLowerCase();
 }
