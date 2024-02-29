@@ -42,7 +42,7 @@ void main() {
       var b1 = (await db.getAllBuildings()).first;
 
       expect(false, b1.favourited);
-      
+
       await db.updateFavouriteStatus(b1.id, true);
 
       expect(true, (await db.getAllBuildings()).first.favourited);
@@ -53,7 +53,7 @@ void main() {
       var b1 = (await db.getAllBuildings()).first;
 
       expect(false, b1.favourited);
-      
+
       await db.updateFavouriteStatus(b1.id, true);
       await db.updateFavouriteStatus(b1.id, false);
 
