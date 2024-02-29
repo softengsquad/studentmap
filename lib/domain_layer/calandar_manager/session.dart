@@ -19,14 +19,16 @@ class Session {
 
   /// Returns a string containing all the information needed about the session
   String getSessionString() =>
-    "$name, ${_getStringTime(start.hour)} - ${_getStringTime(end.hour)}, $building ($room)";
-  
+      "$name, ${_getStringTime(start.hour)} - ${_getStringTime(end.hour)}, $building ($room)";
 
-  String _getStringTime(int timeIn){
-    
+  String _getStringTime(int timeIn) {
     // Guard clause to catch invalid times
-    if(timeIn > 24 || timeIn < 0){throw Exception("Invalid time");}
+    if (timeIn > 24 || timeIn < 0) {
+      throw Exception("Invalid time");
+    }
 
-    return (timeIn <= 12 ) ? "${timeIn.toString()}am" : "${(timeIn - 12).toString()}pm";
+    return (timeIn <= 12)
+        ? "${timeIn.toString()}am"
+        : "${(timeIn - 12).toString()}pm";
   }
 }
