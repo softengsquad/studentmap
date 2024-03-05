@@ -1,8 +1,16 @@
 import "package:flutter/material.dart";
 import "/ui_layer/authentication.dart";
+import "/ui_layer/buildinginfo.dart";
 
-class MapDrawer extends StatelessWidget {
+class MapDrawer extends StatefulWidget {
   const MapDrawer({super.key});
+
+  @override
+  State<MapDrawer> createState() => _MapDrawer();
+}
+
+class _MapDrawer extends State<MapDrawer> {
+  BuildingInfo? buildingInfo;
 
   @override
   Widget build(BuildContext context) {
