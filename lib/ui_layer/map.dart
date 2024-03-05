@@ -4,6 +4,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 import "/domain_layer/building_manager/building.dart";
 import "/data_layer/database.dart";
+import "buildinginfo.dart";
 
 /// Describes an interactive map that is used to display buildings and routes.
 class InteractiveMap extends StatefulWidget {
@@ -21,6 +22,8 @@ class _InteractiveMap extends State<InteractiveMap> {
     target: LatLng(50.79812, -1.09571),
     zoom: 15,
   );
+
+  BuildingInfo? buildingInfo;
 
   @override
   Widget build(BuildContext context) {
@@ -63,6 +66,12 @@ class _InteractiveMap extends State<InteractiveMap> {
         radius: 16,
         strokeWidth: 4,
         strokeColor: colorForBuilding(b),
+        consumeTapEvents: true,
+        onTap: () {
+          setState(() {
+            buildingInfo = BuildingInfo(b);
+          });
+        }
       ));
     }
 
