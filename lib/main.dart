@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import "/ui_layer/map.dart";
 import "/ui_layer/mapdrawer.dart";
+import "/ui_layer/buildinginfo.dart";
 import "/data_layer/database.dart";
 
 void main() {
@@ -39,7 +40,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     Database.open().then((v) {});
 
-    return Scaffold(
+    return ChangeNotifierProvider<CurrentBuildingInfo>(create:(_)=>CurrentBuildingInfo(),child:Scaffold(
         appBar: AppBar(
           backgroundColor: Theme.of(context).colorScheme.inversePrimary,
           title: Text(widget.title),
@@ -63,6 +64,6 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: CircularProgressIndicator(),
                 );
               }
-            }));
+            })));
   }
 }

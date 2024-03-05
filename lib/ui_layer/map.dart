@@ -4,7 +4,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 import "/domain_layer/building_manager/building.dart";
 import "/data_layer/database.dart";
-import "buildinginfo.dart";
+import "/ui_layer/buildinginfo.dart";
 
 /// Describes an interactive map that is used to display buildings and routes.
 class InteractiveMap extends StatefulWidget {
@@ -23,8 +23,6 @@ class _InteractiveMap extends State<InteractiveMap> {
     zoom: 15,
   );
 
-  BuildingInfo? buildingInfo;
-
   @override
   Widget build(BuildContext context) {
     var db = context.read<Database>();
@@ -38,7 +36,7 @@ class _InteractiveMap extends State<InteractiveMap> {
               body: GoogleMap(
                 mapType: MapType.normal,
                 initialCameraPosition: _kGooglePlex,
-                circles: buildingCircles(snapshot.data!),
+                circles: buildingCircles(snapshot.data!, context),
                 onMapCreated: (GoogleMapController controller) {
                   _controller.complete(controller);
                 },
@@ -56,7 +54,8 @@ class _InteractiveMap extends State<InteractiveMap> {
 
   /// Transfosms a list of buildings into a set of Circles to be drawn
   /// on the interactive map.
-  Set<Circle> buildingCircles(List<Building> buildings) {
+  Set<Circle> buildingCircles(List<Building> buildings, BuildContext context) {
+    var curBuildingInfo = context.read<CurrentBuildingInfo>();
     var set = <Circle>{};
 
     for (var b in buildings) {
@@ -68,9 +67,7 @@ class _InteractiveMap extends State<InteractiveMap> {
         strokeColor: colorForBuilding(b),
         consumeTapEvents: true,
         onTap: () {
-          setState(() {
-            buildingInfo = BuildingInfo(b);
-          });
+          curBuildingInfo.building = b;
         }
       ));
     }

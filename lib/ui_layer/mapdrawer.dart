@@ -1,22 +1,17 @@
 import "package:flutter/material.dart";
-import "/domain_layer/building_manager/building.dart";
+import 'package:provider/provider.dart';
 import "/ui_layer/authentication.dart";
 import "/ui_layer/buildinginfo.dart";
 
 // TODO: Documentation
 
-class MapDrawer extends StatefulWidget {
+class MapDrawer extends StatelessWidget {
   const MapDrawer({super.key});
 
   @override
-  State<MapDrawer> createState() => _MapDrawer();
-}
-
-class _MapDrawer extends State<MapDrawer> {
-  BuildingInfo? buildingInfo;
-
-  @override
   Widget build(BuildContext context) {
+    var currentBuildingInfo = context.watch<CurrentBuildingInfo>();
+
     return Drawer(
       child: ListView(
         children: <Widget>[
@@ -30,15 +25,9 @@ class _MapDrawer extends State<MapDrawer> {
             padding: EdgeInsets.symmetric(horizontal: 32),
             child: GoogleSignInButton(),
           ),
-          buildingInfo != null ? buildingInfo! : const SizedBox.shrink(),
+          BuildingInfo(currentBuildingInfo.building),
         ],
       ),
     );
-  }
-
-  void setBuildingInfo(Building building) {
-    setState(() {
-      buildingInfo = BuildingInfo(building);
-    });
   }
 }
