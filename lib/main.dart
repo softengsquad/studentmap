@@ -40,30 +40,33 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     Database.open().then((v) {});
 
-    return ChangeNotifierProvider<CurrentBuildingInfo>(create:(_)=>CurrentBuildingInfo(),child:Scaffold(
-        appBar: AppBar(
-          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-          title: Text(widget.title),
-        ),
-        drawer: const MapDrawer(),
-        body: FutureBuilder<Database>(
-            future: Database.open(),
-            builder: (BuildContext context, AsyncSnapshot<Database> snapshot) {
-              if (snapshot.hasData) {
-                Database db = snapshot.data!;
+    return ChangeNotifierProvider<CurrentBuildingInfo>(
+        create: (_) => CurrentBuildingInfo(),
+        child: Scaffold(
+            appBar: AppBar(
+              backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+              title: Text(widget.title),
+            ),
+            drawer: const MapDrawer(),
+            body: FutureBuilder<Database>(
+                future: Database.open(),
+                builder:
+                    (BuildContext context, AsyncSnapshot<Database> snapshot) {
+                  if (snapshot.hasData) {
+                    Database db = snapshot.data!;
 
-                return Provider(
-                    create: (_) => db,
-                    child: const Center(
-                      child: InteractiveMap(),
-                    ));
-              } else {
-                return const SizedBox(
-                  width: 60,
-                  height: 60,
-                  child: CircularProgressIndicator(),
-                );
-              }
-            })));
+                    return Provider(
+                        create: (_) => db,
+                        child: const Center(
+                          child: InteractiveMap(),
+                        ));
+                  } else {
+                    return const SizedBox(
+                      width: 60,
+                      height: 60,
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                })));
   }
 }

@@ -60,17 +60,16 @@ class _InteractiveMap extends State<InteractiveMap> {
 
     for (var b in buildings) {
       set.add(Circle(
-        circleId: CircleId(b.id.toString()),
-        center: b.getPosition(),
-        radius: 16,
-        strokeWidth: 4,
-        strokeColor: colorForBuilding(b),
-        consumeTapEvents: true,
-        onTap: () {
-          curBuildingInfo.building = b;
-          Scaffold.of(context).openDrawer();
-        }
-      ));
+          circleId: CircleId(b.id.toString()),
+          center: b.getPosition(),
+          radius: 16,
+          strokeWidth: 4,
+          strokeColor: colorForBuilding(b),
+          consumeTapEvents: true,
+          onTap: () {
+            curBuildingInfo.building = b;
+            Scaffold.of(context).openDrawer();
+          }));
     }
 
     return set;
