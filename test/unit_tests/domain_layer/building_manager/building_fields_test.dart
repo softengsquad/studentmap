@@ -60,7 +60,6 @@ void main() {
       expect("Richmond", testObj.name);
     });
 
-
     // Test for initializing addressLine1
     test("Address Line 1 initializes to 'Portland St'", () {
       // Arrange

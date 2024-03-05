@@ -1,8 +1,7 @@
-import "dart:async";
-
 import 'package:flutter/material.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:provider/provider.dart';
 
+import "/ui_layer/map.dart";
 import "/ui_layer/mapdrawer.dart";
 import "/data_layer/database.dart";
 
@@ -36,7 +35,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   @override
   Widget build(BuildContext context) {
     Database.open().then((v) {});
@@ -46,40 +44,25 @@ class _MyHomePageState extends State<MyHomePage> {
           backgroundColor: Theme.of(context).colorScheme.inversePrimary,
           title: Text(widget.title),
         ),
-        body: const Center(
-          child: MapView(),
-        ),
         drawer: const MapDrawer(),
-      );
-  }
-}
+        body: FutureBuilder<Database>(
+            future: Database.open(),
+            builder: (BuildContext context, AsyncSnapshot<Database> snapshot) {
+              if (snapshot.hasData) {
+                Database db = snapshot.data!;
 
-class MapView extends StatefulWidget {
-  const MapView({super.key});
-
-  @override
-  State<MapView> createState() => MapViewState();
-}
-
-class MapViewState extends State<MapView> {
-  final Completer<GoogleMapController> _controller =
-      Completer<GoogleMapController>();
-
-  static const CameraPosition _kGooglePlex = CameraPosition(
-    target: LatLng(50.79812, -1.09971),
-    zoom: 16.5,
-  );
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: GoogleMap(
-        mapType: MapType.normal,
-        initialCameraPosition: _kGooglePlex,
-        onMapCreated: (GoogleMapController controller) {
-          _controller.complete(controller);
-        },
-      ),
-    );
+                return Provider(
+                    create: (_) => db,
+                    child: const Center(
+                      child: InteractiveMap(),
+                    ));
+              } else {
+                return const SizedBox(
+                  width: 60,
+                  height: 60,
+                  child: CircularProgressIndicator(),
+                );
+              }
+            }));
   }
 }

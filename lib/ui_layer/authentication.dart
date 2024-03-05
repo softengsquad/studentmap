@@ -5,7 +5,7 @@ import "/domain_layer/authenticator.dart";
 
 /// Creates a simple button to allow the user to sign in with Google.
 /// If the user is signed in, the button instead displays text stating
-/// the user's email address. 
+/// the user's email address.
 class GoogleSignInButton extends StatefulWidget {
   const GoogleSignInButton({super.key});
 
@@ -25,22 +25,22 @@ class _GoogleSignInButton extends State<GoogleSignInButton> {
   void initState() {
     super.initState();
 
-    _googleSignIn.onCurrentUserChanged.listen((GoogleSignInAccount? user) async {
-        setState(() {
-          _currentUser = user;
-        });
+    _googleSignIn.onCurrentUserChanged
+        .listen((GoogleSignInAccount? user) async {
+      setState(() {
+        _currentUser = user;
       });
+    });
   }
 
   @override
   Widget build(context) {
     if (_currentUser == null) {
       return ElevatedButton(
-        child: const Text("Google Sign In"),
-        onPressed: () {
-          trySignIn();
-        }
-      );
+          child: const Text("Google Sign In"),
+          onPressed: () {
+            trySignIn();
+          });
     } else {
       return Text("Signed in as ${_currentUser!.email}");
     }
