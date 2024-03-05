@@ -68,6 +68,7 @@ class _InteractiveMap extends State<InteractiveMap> {
         consumeTapEvents: true,
         onTap: () {
           curBuildingInfo.building = b;
+          Scaffold.of(context).openDrawer();
         }
       ));
     }
