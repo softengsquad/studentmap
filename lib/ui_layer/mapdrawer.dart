@@ -3,8 +3,10 @@ import 'package:provider/provider.dart';
 import "/ui_layer/authentication.dart";
 import "/ui_layer/buildinginfo.dart";
 
-// TODO: Documentation
-
+/// The drawer interface that appears at the left side of the screen.
+///
+/// Displays various information such as the [GoogleSignInButton] and
+/// current [BuildingInfo].
 class MapDrawer extends StatelessWidget {
   const MapDrawer({super.key});
 
