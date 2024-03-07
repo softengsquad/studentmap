@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import "/domain_layer/building_manager/building.dart";
+import "/util.dart";
 
 /// A widget that displays the information for a specified [Building].
 ///
@@ -25,7 +26,7 @@ class BuildingInfo extends StatelessWidget {
           padding: EdgeInsets.symmetric(vertical: 4),
         ),
         Text("${building!.addressLine1}, ${building!.addressLine2}"),
-        Text(building!.postcode),
+        Text(prettifyPostcode(building!.postcode)),
       ],
     );
   }
