@@ -14,21 +14,17 @@ class BuildingInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (building == null) {
-      return const Text("No building - tap a building to view its info.");
+      return const Center(child: Text("No building - tap a building to view its info."));
     }
 
-    return Row(
+    return Column(
       children: <Widget>[
-        Column(
-          children: <Widget>[
-            Text(building!.name),
-            Text("${building!.addressLine1}, ${building!.addressLine2}"),
-            Text(building!.postcode),
-          ],
+        Text(building!.name),
+        const Padding(
+          padding: EdgeInsets.symmetric(vertical: 4),
         ),
-        const Column(
-          children: <Widget>[],
-        ),
+        Text("${building!.addressLine1}, ${building!.addressLine2}"),
+        Text(building!.postcode),
       ],
     );
   }

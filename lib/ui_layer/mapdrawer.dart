@@ -27,6 +27,7 @@ class MapDrawer extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 32),
             child: GoogleSignInButton(),
           ),
+          const Padding(padding: EdgeInsets.symmetric(vertical: 8)),
           BuildingInfo(currentBuildingInfo.building),
         ],
       ),
