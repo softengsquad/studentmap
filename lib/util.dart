@@ -6,8 +6,10 @@ bool isTesting() {
   return Platform.environment.containsKey("FLUTTER_TEST");
 }
 
-/// "Prettifies" a postcode by inserting a space.
+/// "Prettifies" a postcode by inserting a space and making uppercase.
 String prettifyPostcode(String postcode) {
+  postcode = postcode.toUpperCase();
+
   if (postcode.length <= 3) {
     return postcode;
   }

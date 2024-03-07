@@ -14,5 +14,14 @@ void main() {
     test("Prettify 7 letter postcode", () async {
       expect(prettifyPostcode("AA9A9AA"), "AA9A 9AA");
     });
+
+    // Not a valid postcode so should do nothing.
+    test("Prettify 3 letter postcode", () async {
+      expect(prettifyPostcode("A9A"), "A9A");
+    });
+
+    test("Prettify lowercase postcode", () async {
+      expect(prettifyPostcode("aa9a9aA"), "AA9A 9AA");
+    });
   });
 }
