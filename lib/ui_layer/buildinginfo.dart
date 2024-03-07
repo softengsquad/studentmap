@@ -3,8 +3,8 @@ import "/domain_layer/building_manager/building.dart";
 
 /// A widget that displays the information for a specified [Building].
 ///
-/// If the given [Building] is null, simple text is displayed telling the 
-/// user that a building hasn't been specified (e.g. tapping on a 
+/// If the given [Building] is null, simple text is displayed telling the
+/// user that a building hasn't been specified (e.g. tapping on a
 /// building within the map).
 class BuildingInfo extends StatelessWidget {
   const BuildingInfo(this.building, {super.key});
@@ -14,7 +14,8 @@ class BuildingInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (building == null) {
-      return const Center(child: Text("No building - tap a building to view its info."));
+      return const Center(
+          child: Text("No building - tap a building to view its info."));
     }
 
     return Column(
