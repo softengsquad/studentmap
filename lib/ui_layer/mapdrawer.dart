@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 import "/ui_layer/authentication.dart";
+import "/ui_layer/calendar.dart";
 
 class MapDrawer extends StatelessWidget {
   const MapDrawer({super.key});
@@ -19,6 +20,7 @@ class MapDrawer extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 32),
             child: GoogleSignInButton(),
           ),
+          Calendar(),
         ],
       ),
     );
