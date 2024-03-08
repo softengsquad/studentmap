@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 import "package:google_sign_in/google_sign_in.dart";
+import 'package:extension_google_sign_in_as_googleapis_auth/extension_google_sign_in_as_googleapis_auth.dart';
 
 import "/domain_layer/authenticator.dart";
 
@@ -25,11 +26,16 @@ class _GoogleSignInButton extends State<GoogleSignInButton> {
   void initState() {
     super.initState();
 
-    _googleSignIn.onCurrentUserChanged
-        .listen((GoogleSignInAccount? user) async {
+    _googleSignIn.onCurrentUserChanged.listen((GoogleSignInAccount? user) async {
       setState(() {
         _currentUser = user;
       });
+
+      if (user == null) {
+        return;
+      }
+
+      var httpClient = (await _googleSignIn.authenticatedClient())!;
     });
   }
 
