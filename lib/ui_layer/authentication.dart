@@ -19,7 +19,7 @@ class GoogleSignInButton extends StatefulWidget {
 class _GoogleSignInButton extends State<GoogleSignInButton> {
   @override
   Widget build(context) {
-    var googleAuth = context.read<GoogleAuth>();
+    var googleAuth = context.watch<GoogleAuth>();
 
     return FutureBuilder(
       future: googleAuth.isSignedIn(),
@@ -44,11 +44,19 @@ class _GoogleSignInButton extends State<GoogleSignInButton> {
 }
 
 /// Holds the user's Google authentication data if signed in.
-class GoogleAuth {
+///
+/// Will notify listeners when the currently signed in user changes.
+class GoogleAuth extends ChangeNotifier {
   final GoogleSignIn _googleSignIn = GoogleSignIn(
     serverClientId: getClientId(),
     scopes: getScopes(),
   );
+
+  GoogleAuth() {
+    _googleSignIn.onCurrentUserChanged.listen((GoogleSignInAccount? user) {
+      notifyListeners();
+    });
+  }
 
   /// Returns the current user or null if not signed in.
   GoogleSignInAccount? getUser() {
@@ -68,10 +76,10 @@ class GoogleAuth {
   // Returns true if the user is currently signed into Google and authenticated
   // with the app.
   Future<bool> isSignedIn() async {
-    return await _googleSignIn.isSignedIn();
+    return await _googleSignIn.isSignedIn() && getUser() != null;
   }
 
-  /// Fails if the user is not authenticated.
+  /// Returns null if the user is not authenticated.
   Future<AuthClient?> getHttpClient() async {
     return _googleSignIn.authenticatedClient();
   }
