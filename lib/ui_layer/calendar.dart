@@ -45,12 +45,38 @@ class _Calendar extends State<Calendar> {
 
                 var calendars = snapshot.data!;
 
-                String s = "";
+                String? uopCalendarId;
                 for (var e in calendars.items) {
-                  s += "${e.summary}, ";
+                  // FIXME: This isn't a great way to identify which
+                  // calendar holds the timetabling information, because
+                  // even though 'UoP Timetable' is the default calendar name,
+                  // the user may name theirs differently.
+                  if (e.summary.toLowerCase() == "uop timetable") {
+                    uopCalendarId = e.id!;
+                  }
                 }
 
-                return Text(s);
+                if (uopCalendarId == null) {
+                  return const Text("Failed to find timetable calendar");
+                }
+
+                return FutureBuilder( // Obtain the events within the timetable calendar.
+                  future: calendarApi.events.list(uopCalendarId),
+                  builder: (BuildContext context, AsyncSnapshot snapshot) {
+                    if (!snapshot.hasData) {
+                      return const CircularProgressIndicator();
+                    }
+
+                    var events = snapshot.data!;
+
+                    String eventList = "";
+                    for (var e in events.items) {
+                      eventList += "${e.start.dateTime} ${e.summary}\n";
+                    }
+
+                    return Text(eventList);
+                  }
+                );
               }
             );
           }
