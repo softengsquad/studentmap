@@ -5,6 +5,8 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import "/ui_layer/mapdrawer.dart";
 import "/data_layer/database.dart";
+import 'package:provider/provider.dart';
+import "/ui_layer/authentication.dart";
 
 void main() {
   runApp(const MyApp());
@@ -40,7 +42,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     Database.open().then((v) {});
 
-    return Scaffold(
+    return Provider(create: (_) => GoogleAuth(), child: Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
@@ -49,7 +51,7 @@ class _MyHomePageState extends State<MyHomePage> {
         child: MapView(),
       ),
       drawer: const MapDrawer(),
-    );
+    ));
   }
 }
 
