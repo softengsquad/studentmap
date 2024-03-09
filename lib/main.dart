@@ -42,16 +42,18 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     Database.open().then((v) {});
 
-    return ChangeNotifierProvider(create: (_) => GoogleAuth(), child: Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
-      ),
-      body: const Center(
-        child: MapView(),
-      ),
-      drawer: const MapDrawer(),
-    ));
+    return ChangeNotifierProvider(
+        create: (_) => GoogleAuth(),
+        child: Scaffold(
+          appBar: AppBar(
+            backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+            title: Text(widget.title),
+          ),
+          body: const Center(
+            child: MapView(),
+          ),
+          drawer: const MapDrawer(),
+        ));
   }
 }
 

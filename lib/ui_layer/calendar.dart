@@ -16,100 +16,105 @@ class _Calendar extends State<Calendar> {
   Widget build(BuildContext context) {
     var googleAuth = context.watch<GoogleAuth>(); // Rebuilds if user changes.
 
-    return FutureBuilder( // Check if user is signed in.
-      future: googleAuth.isSignedIn(),
-      builder: (BuildContext context, AsyncSnapshot snapshot) {
-        if (!snapshot.hasData) {
+    return FutureBuilder(
+        // Check if user is signed in.
+        future: googleAuth.isSignedIn(),
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
+          if (!snapshot.hasData) {
             return const CircularProgressIndicator();
-        }
+          }
 
-        if (!snapshot.data) {
+          if (!snapshot.data) {
             return const Text("Cannot display calendar - not signed in");
-        }
+          }
 
-        return FutureBuilder( // Try to obtain HTTP client for Google user.
-          future: googleAuth.getHttpClient(),
-          builder: (BuildContext context, AsyncSnapshot snapshot) {
-            if (!snapshot.hasData) {
-              return const CircularProgressIndicator();
-            }
-
-            var httpClient = snapshot.data!;
-            var calendarApi = CalendarApi(httpClient);
-
-            return FutureBuilder( // Obtain the user's list of calendars.
-              future: calendarApi.calendarList.list(),
+          return FutureBuilder(
+              // Try to obtain HTTP client for Google user.
+              future: googleAuth.getHttpClient(),
               builder: (BuildContext context, AsyncSnapshot snapshot) {
                 if (!snapshot.hasData) {
                   return const CircularProgressIndicator();
                 }
 
-                var calendars = snapshot.data!;
+                var httpClient = snapshot.data!;
+                var calendarApi = CalendarApi(httpClient);
 
-                String? uopCalendarId;
-                for (var e in calendars.items) {
-                  // FIXME: This isn't a great way to identify which
-                  // calendar holds the timetabling information, because
-                  // even though 'UoP Timetable' is the default calendar name,
-                  // the user may name theirs differently.
-                  if (e.summary.toLowerCase() == "uop timetable") {
-                    uopCalendarId = e.id!;
-                    break;
-                  }
-                }
+                return FutureBuilder(
+                    // Obtain the user's list of calendars.
+                    future: calendarApi.calendarList.list(),
+                    builder: (BuildContext context, AsyncSnapshot snapshot) {
+                      if (!snapshot.hasData) {
+                        return const CircularProgressIndicator();
+                      }
 
-                if (uopCalendarId == null) {
-                  return const Text("Failed to find timetable calendar");
-                }
+                      var calendars = snapshot.data!;
 
-                return FutureBuilder( // Obtain the events within the timetable calendar.
-                  future: calendarApi.events.list(uopCalendarId),
-                  builder: (BuildContext context, AsyncSnapshot snapshot) {
-                    if (!snapshot.hasData) {
-                      return const CircularProgressIndicator();
-                    }
+                      String? uopCalendarId;
+                      for (var e in calendars.items) {
+                        // FIXME: This isn't a great way to identify which
+                        // calendar holds the timetabling information, because
+                        // even though 'UoP Timetable' is the default calendar name,
+                        // the user may name theirs differently.
+                        if (e.summary.toLowerCase() == "uop timetable") {
+                          uopCalendarId = e.id!;
+                          break;
+                        }
+                      }
 
-                    DateFormat dayMonthFormatter = DateFormat("EEEE, d MMMM");
-                    DateFormat timeFormatter = DateFormat("Hm");
-                    DateTime now = DateTime.now();
-                    now = now.add(Duration(days: 3)); // TODO: remove
+                      if (uopCalendarId == null) {
+                        return const Text("Failed to find timetable calendar");
+                      }
 
-                    List<Event> events = snapshot.data!.items!;
+                      return FutureBuilder(
+                          // Obtain the events within the timetable calendar.
+                          future: calendarApi.events.list(uopCalendarId),
+                          builder:
+                              (BuildContext context, AsyncSnapshot snapshot) {
+                            if (!snapshot.hasData) {
+                              return const CircularProgressIndicator();
+                            }
 
-                    List<Event> eventsToday = events.where((e) =>
-                      e.start!.dateTime!.day == now.day
-                      && e.start!.dateTime!.month == now.month
-                      && e.start!.dateTime!.year == now.year).toList();
+                            DateFormat dayMonthFormatter =
+                                DateFormat("EEEE, d MMMM");
+                            DateFormat timeFormatter = DateFormat("Hm");
+                            DateTime now = DateTime.now();
 
-                    eventsToday.sort((a, b) => a.start!.dateTime!.compareTo(b.start!.dateTime!));
+                            List<Event> events = snapshot.data!.items!;
 
-                    List<Widget> widgets = [];
-                    for (var e in eventsToday) {
-                      widgets.add(Text(e.summary!, overflow: TextOverflow.ellipsis));
-                      widgets.add(Text("${timeFormatter.format(e.start!.dateTime!)} - ${timeFormatter.format(e.end!.dateTime!)}"));
-                      widgets.add(Text(e.location!));
-                      widgets.add(const Padding(
-                        padding: EdgeInsets.symmetric(vertical: 6),
-                      ));
-                    }
+                            List<Event> eventsToday = events
+                                .where((e) =>
+                                    e.start!.dateTime!.day == now.day &&
+                                    e.start!.dateTime!.month == now.month &&
+                                    e.start!.dateTime!.year == now.year)
+                                .toList();
 
-                    return Column(
-                      children: <Widget>[
-                        Text("Timetable for ${dayMonthFormatter.format(now)}"),
-                        const Padding(
-                          padding: EdgeInsetsDirectional.symmetric(vertical: 6),
-                        ),
-                        for (Widget w in widgets)
-                          w
-                      ]
-                    );
-                  }
-                );
-              }
-            );
-          }
-        );
-      }
-    );
+                            eventsToday.sort((a, b) => a.start!.dateTime!
+                                .compareTo(b.start!.dateTime!));
+
+                            List<Widget> widgets = [];
+                            for (var e in eventsToday) {
+                              widgets.add(Text(e.summary!,
+                                  overflow: TextOverflow.ellipsis));
+                              widgets.add(Text(
+                                  "${timeFormatter.format(e.start!.dateTime!)} - ${timeFormatter.format(e.end!.dateTime!)}"));
+                              widgets.add(Text(e.location!));
+                              widgets.add(const Padding(
+                                padding: EdgeInsets.symmetric(vertical: 6),
+                              ));
+                            }
+
+                            return Column(children: <Widget>[
+                              Text(
+                                  "Timetable for ${dayMonthFormatter.format(now)}"),
+                              const Padding(
+                                padding: EdgeInsetsDirectional.symmetric(
+                                    vertical: 6),
+                              ),
+                              for (Widget w in widgets) w
+                            ]);
+                          });
+                    });
+              });
+        });
   }
 }

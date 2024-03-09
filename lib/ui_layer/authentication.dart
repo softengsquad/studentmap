@@ -22,24 +22,23 @@ class _GoogleSignInButton extends State<GoogleSignInButton> {
     var googleAuth = context.watch<GoogleAuth>();
 
     return FutureBuilder(
-      future: googleAuth.isSignedIn(),
-      builder: (BuildContext context, AsyncSnapshot snapshot) {
-        if (!snapshot.hasData) {
-          return const CircularProgressIndicator();
-        }
+        future: googleAuth.isSignedIn(),
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
+          if (!snapshot.hasData) {
+            return const CircularProgressIndicator();
+          }
 
-        var isSignedIn = snapshot.data!;
-        if (isSignedIn) {
-          return Text("Signed in as ${googleAuth.getUser()!.email}");
-        }
-        
-        return ElevatedButton(
-            child: const Text("Google Sign In"),
-            onPressed: () {
-              googleAuth.trySignIn();
-            });
-      }
-    );
+          var isSignedIn = snapshot.data!;
+          if (isSignedIn) {
+            return Text("Signed in as ${googleAuth.getUser()!.email}");
+          }
+
+          return ElevatedButton(
+              child: const Text("Google Sign In"),
+              onPressed: () {
+                googleAuth.trySignIn();
+              });
+        });
   }
 }
 
