@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:googleapis/calendar/v3.dart';
 import 'package:provider/provider.dart';
+import 'package:intl/intl.dart';
 import '/ui_layer/authentication.dart';
 
 class Calendar extends StatefulWidget {
@@ -53,6 +54,7 @@ class _Calendar extends State<Calendar> {
                   // the user may name theirs differently.
                   if (e.summary.toLowerCase() == "uop timetable") {
                     uopCalendarId = e.id!;
+                    break;
                   }
                 }
 
@@ -67,14 +69,40 @@ class _Calendar extends State<Calendar> {
                       return const CircularProgressIndicator();
                     }
 
-                    var events = snapshot.data!;
+                    DateFormat dayMonthFormatter = DateFormat("EEEE, d MMMM");
+                    DateFormat timeFormatter = DateFormat("Hm");
+                    DateTime now = DateTime.now();
+                    now = now.add(Duration(days: 3)); // TODO: remove
 
-                    String eventList = "";
-                    for (var e in events.items) {
-                      eventList += "${e.start.dateTime} ${e.summary}\n";
+                    List<Event> events = snapshot.data!.items!;
+
+                    List<Event> eventsToday = events.where((e) =>
+                      e.start!.dateTime!.day == now.day
+                      && e.start!.dateTime!.month == now.month
+                      && e.start!.dateTime!.year == now.year).toList();
+
+                    eventsToday.sort((a, b) => a.start!.dateTime!.compareTo(b.start!.dateTime!));
+
+                    List<Widget> widgets = [];
+                    for (var e in eventsToday) {
+                      widgets.add(Text(e.summary!, overflow: TextOverflow.ellipsis));
+                      widgets.add(Text("${timeFormatter.format(e.start!.dateTime!)} - ${timeFormatter.format(e.end!.dateTime!)}"));
+                      widgets.add(Text(e.location!));
+                      widgets.add(const Padding(
+                        padding: EdgeInsets.symmetric(vertical: 6),
+                      ));
                     }
 
-                    return Text(eventList);
+                    return Column(
+                      children: <Widget>[
+                        Text("Timetable for ${dayMonthFormatter.format(now)}"),
+                        const Padding(
+                          padding: EdgeInsetsDirectional.symmetric(vertical: 6),
+                        ),
+                        for (Widget w in widgets)
+                          w
+                      ]
+                    );
                   }
                 );
               }
