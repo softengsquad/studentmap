@@ -49,93 +49,90 @@ class _Calendar extends State<Calendar> {
                         return const CircularProgressIndicator();
                       }
 
-                      var calendars = snapshot.data!;
+                      String? calendarId =
+                          findTimetableCalendar(snapshot.data!.items!);
 
-                      String? uopCalendarId;
-                      for (var e in calendars.items) {
-                        // FIXME: This isn't a great way to identify which
-                        // calendar holds the timetabling information, because
-                        // even though 'UoP Timetable' is the default calendar name,
-                        // the user may name theirs differently.
-                        if (e.summary.toLowerCase() == "uop timetable") {
-                          uopCalendarId = e.id!;
-                          break;
-                        }
-                      }
-
-                      if (uopCalendarId == null) {
+                      if (calendarId == null) {
                         return const Text("Failed to find timetable calendar");
                       }
 
                       return FutureBuilder(
                           // Obtain the events within the timetable calendar.
-                          future: calendarApi.events.list(uopCalendarId),
+                          future: calendarApi.events.list(calendarId),
                           builder:
                               (BuildContext context, AsyncSnapshot snapshot) {
                             if (!snapshot.hasData) {
                               return const CircularProgressIndicator();
                             }
 
-                            DateFormat dayMonthFormatter =
-                                DateFormat("EEEE, d MMMM");
-                            DateFormat timeFormatter = DateFormat("Hm");
-
-                            List<Event> events = snapshot.data!.items!;
-
-                            List<Event> eventsToday = events
-                                .where((e) =>
-                                    e.start!.dateTime!.day == date.day &&
-                                    e.start!.dateTime!.month == date.month &&
-                                    e.start!.dateTime!.year == date.year)
-                                .toList();
-
-                            eventsToday.sort((a, b) => a.start!.dateTime!
-                                .compareTo(b.start!.dateTime!));
-
-                            List<Widget> widgets = [];
-                            for (var e in eventsToday) {
-                              widgets.add(Text(e.summary!,
-                                  overflow: TextOverflow.ellipsis));
-                              widgets.add(Text(
-                                  "${timeFormatter.format(e.start!.dateTime!)} - ${timeFormatter.format(e.end!.dateTime!)}"));
-                              widgets.add(Text(e.location!));
-                              widgets.add(const Padding(
-                                padding: EdgeInsets.symmetric(vertical: 6),
-                              ));
-                            }
-
-                            return Column(children: <Widget>[
-                              Text(
-                                  "Timetable for ${dayMonthFormatter.format(date)}"),
-                              Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    ElevatedButton(
-                                        child: const Text("<"),
-                                        onPressed: () {
-                                          setState(() {
-                                            date = date
-                                                .subtract(Duration(days: 1));
-                                          });
-                                        }),
-                                    ElevatedButton(
-                                        child: const Text(">"),
-                                        onPressed: () {
-                                          setState(() {
-                                            date = date.add(Duration(days: 1));
-                                          });
-                                        }),
-                                  ]),
-                              const Padding(
-                                padding: EdgeInsetsDirectional.symmetric(
-                                    vertical: 6),
-                              ),
-                              for (Widget w in widgets) w
-                            ]);
+                            return timetable(snapshot.data!.items!);
                           });
                     });
               });
         });
+  }
+
+  String? findTimetableCalendar(List<CalendarListEntry> events) {
+    for (var e in events) {
+      // FIXME: This isn't a great way to identify which
+      // calendar holds the timetabling information, because
+      // even though 'UoP Timetable' is the default calendar name,
+      // the user may name theirs differently.
+      if (e.summary!.toLowerCase() == "uop timetable") {
+        return e.id!;
+      }
+    }
+
+    return null;
+  }
+
+  Widget timetable(List<Event> events) {
+    DateFormat dayMonthFormatter = DateFormat("EEEE, d MMMM");
+    DateFormat timeFormatter = DateFormat("Hm");
+
+    List<Event> eventsToday = events
+        .where((e) =>
+            e.start!.dateTime!.day == date.day &&
+            e.start!.dateTime!.month == date.month &&
+            e.start!.dateTime!.year == date.year)
+        .toList();
+
+    eventsToday
+        .sort((a, b) => a.start!.dateTime!.compareTo(b.start!.dateTime!));
+
+    List<Widget> widgets = [];
+    for (var e in eventsToday) {
+      widgets.add(Text(e.summary!, overflow: TextOverflow.ellipsis));
+      widgets.add(Text(
+          "${timeFormatter.format(e.start!.dateTime!)} - ${timeFormatter.format(e.end!.dateTime!)}"));
+      widgets.add(Text(e.location!));
+      widgets.add(const Padding(
+        padding: EdgeInsets.symmetric(vertical: 6),
+      ));
+    }
+
+    return Column(children: <Widget>[
+      Text("Timetable for ${dayMonthFormatter.format(date)}"),
+      Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+        ElevatedButton(
+            child: const Text("<"),
+            onPressed: () {
+              setState(() {
+                date = date.subtract(const Duration(days: 1));
+              });
+            }),
+        ElevatedButton(
+            child: const Text(">"),
+            onPressed: () {
+              setState(() {
+                date = date.add(const Duration(days: 1));
+              });
+            }),
+      ]),
+      const Padding(
+        padding: EdgeInsetsDirectional.symmetric(vertical: 6),
+      ),
+      for (Widget w in widgets) w
+    ]);
   }
 }
