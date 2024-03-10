@@ -17,13 +17,20 @@ class MapDrawer extends StatelessWidget {
             child: SizedBox(),
           ),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 32),
-            child: GoogleSignInButton(),
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(vertical: 16),
-          ),
-          Calendar(),
+            padding: EdgeInsets.symmetric(horizontal: 16),
+            child: Column(
+              children: [
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 32),
+                  child: GoogleSignInButton(),
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: 16),
+                ),
+                Calendar(),
+              ]
+            )
+          )
         ],
       ),
     );
