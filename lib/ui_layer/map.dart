@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart' show rootBundle;
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 import "/domain_layer/building_manager/building.dart";
@@ -27,6 +28,11 @@ class _InteractiveMap extends State<InteractiveMap> {
   Widget build(BuildContext context) {
     var db = context.read<Database>();
 
+    String? mapStyle;
+    rootBundle.loadString("assets/map_style.json").then((String style) {
+      mapStyle = style;
+    });
+
     return FutureBuilder(
         future: db.getAllBuildings(),
         builder:
@@ -37,6 +43,7 @@ class _InteractiveMap extends State<InteractiveMap> {
                 mapType: MapType.normal,
                 initialCameraPosition: _kGooglePlex,
                 circles: buildingCircles(snapshot.data!, context),
+                style: mapStyle,
                 onMapCreated: (GoogleMapController controller) {
                   _controller.complete(controller);
                 },
