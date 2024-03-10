@@ -12,6 +12,8 @@ class Calendar extends StatefulWidget {
 }
 
 class _Calendar extends State<Calendar> {
+  DateTime date = DateTime.now();
+
   @override
   Widget build(BuildContext context) {
     var googleAuth = context.watch<GoogleAuth>(); // Rebuilds if user changes.
@@ -77,15 +79,14 @@ class _Calendar extends State<Calendar> {
                             DateFormat dayMonthFormatter =
                                 DateFormat("EEEE, d MMMM");
                             DateFormat timeFormatter = DateFormat("Hm");
-                            DateTime now = DateTime.now();
 
                             List<Event> events = snapshot.data!.items!;
 
                             List<Event> eventsToday = events
                                 .where((e) =>
-                                    e.start!.dateTime!.day == now.day &&
-                                    e.start!.dateTime!.month == now.month &&
-                                    e.start!.dateTime!.year == now.year)
+                                    e.start!.dateTime!.day == date.day &&
+                                    e.start!.dateTime!.month == date.month &&
+                                    e.start!.dateTime!.year == date.year)
                                 .toList();
 
                             eventsToday.sort((a, b) => a.start!.dateTime!
@@ -105,7 +106,27 @@ class _Calendar extends State<Calendar> {
 
                             return Column(children: <Widget>[
                               Text(
-                                  "Timetable for ${dayMonthFormatter.format(now)}"),
+                                  "Timetable for ${dayMonthFormatter.format(date)}"),
+                              Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    ElevatedButton(
+                                        child: const Text("<"),
+                                        onPressed: () {
+                                          setState(() {
+                                            date = date
+                                                .subtract(Duration(days: 1));
+                                          });
+                                        }),
+                                    ElevatedButton(
+                                        child: const Text(">"),
+                                        onPressed: () {
+                                          setState(() {
+                                            date = date.add(Duration(days: 1));
+                                          });
+                                        }),
+                                  ]),
                               const Padding(
                                 padding: EdgeInsetsDirectional.symmetric(
                                     vertical: 6),
