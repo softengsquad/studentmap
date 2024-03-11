@@ -15,8 +15,7 @@ class BuildingInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (building == null) {
-      return const Center(
-          child: Text("No building - tap a building to view its info."));
+      return const Text("No building - tap a building to view its info.");
     }
 
     return Column(

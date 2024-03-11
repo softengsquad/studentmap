@@ -16,34 +16,35 @@ class MapDrawer extends StatelessWidget {
     var currentBuildingInfo = context.watch<CurrentBuildingInfo>();
 
     return Drawer(
-      child: ListView(
-        children: <Widget>[
-          const DrawerHeader(
-            decoration: BoxDecoration(
-              color: Colors.blue,
-            ),
-            child: SizedBox(),
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16),
-            child: Column(
+      child: DefaultTabController(
+        length: 3,
+        child: Scaffold(
+          body: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: TabBarView(
               children: [
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 32),
-                  child: GoogleSignInButton(),
+                  padding: const EdgeInsets.symmetric(vertical: 32),
+                  child: BuildingInfo(currentBuildingInfo.building),
                 ),
-                Padding(
-                  padding: EdgeInsets.symmetric(vertical: 16),
-                  ),
-                BuildingInfo(currentBuildingInfo.building),
-                Padding(
-                  padding: EdgeInsets.symmetric(vertical: 16),
-                  ),
-                Calendar(),
-              ]
-            )
-          )
-        ],
+                const Padding(
+                    padding: EdgeInsets.symmetric(vertical: 16),
+                    child: Column(children: [
+                      GoogleSignInButton(),
+                      Calendar(),
+                    ])),
+              ],
+            ),
+          ),
+          appBar: AppBar(
+            bottom: const TabBar(
+              tabs: [
+                Tab(icon: Icon(Icons.house)),
+                Tab(icon: Icon(Icons.calendar_month)),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }
