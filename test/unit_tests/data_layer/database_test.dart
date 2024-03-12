@@ -36,5 +36,28 @@ void main() {
       expect("uni", b1.type);
       expect(false, b1.favourited);
     });
+
+    test("update favourite status of building to true", () async {
+      var db = await Database.open();
+      var b1 = (await db.getAllBuildings()).first;
+
+      expect(false, b1.favourited);
+
+      await db.updateFavouriteStatus(b1.id, true);
+
+      expect(true, (await db.getAllBuildings()).first.favourited);
+    });
+
+    test("update favourite status of building to true then false", () async {
+      var db = await Database.open();
+      var b1 = (await db.getAllBuildings()).first;
+
+      expect(false, b1.favourited);
+
+      await db.updateFavouriteStatus(b1.id, true);
+      await db.updateFavouriteStatus(b1.id, false);
+
+      expect(false, (await db.getAllBuildings()).first.favourited);
+    });
   });
 }
