@@ -1,4 +1,5 @@
 import "package:flutter/services.dart" show rootBundle;
+import "package:flutter/foundation.dart" show kDebugMode;
 import "package:sqflite/sqflite.dart" as sqflite;
 import "../util.dart";
 import "/domain_layer/building_manager/building.dart";
@@ -15,7 +16,7 @@ class Database {
     var dbName = _getDatabaseName();
 
     // Start with a fresh database for each test case
-    if (isTesting()) {
+    if (isTesting() || kDebugMode) {
       await sqflite.deleteDatabase(dbName);
     }
 
