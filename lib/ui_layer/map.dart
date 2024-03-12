@@ -62,12 +62,18 @@ class _InteractiveMap extends State<InteractiveMap> {
   /// Transfosms a list of buildings into a set of [Marker] to be drawn
   /// on the interactive map.
   Set<Marker> buildingMarkers(List<Building> buildings) {
+    var curBuildingInfo = context.read<CurrentBuildingInfo>();
     var set = <Marker>{};
 
     for (var b in buildings) {
       set.add(Marker(
         markerId: MarkerId(b.id.toString()),
         position: b.getPosition(),
+       consumeTapEvents: true,
+        onTap: () {
+          curBuildingInfo.building = b;
+          Scaffold.of(context).openDrawer();
+        }
       ));
     }
 
