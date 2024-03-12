@@ -35,7 +35,7 @@ class _InteractiveMap extends State<InteractiveMap> {
               body: GoogleMap(
                 mapType: MapType.normal,
                 initialCameraPosition: _kGooglePlex,
-                circles: buildingCircles(snapshot.data!),
+                markers: buildingMarkers(snapshot.data!),
                 onMapCreated: (GoogleMapController controller) {
                   _controller.complete(controller);
                 },
@@ -51,18 +51,15 @@ class _InteractiveMap extends State<InteractiveMap> {
         });
   }
 
-  /// Transfosms a list of buildings into a set of Circles to be drawn
+  /// Transfosms a list of buildings into a set of [Marker] to be drawn
   /// on the interactive map.
-  Set<Circle> buildingCircles(List<Building> buildings) {
-    var set = <Circle>{};
+  Set<Marker> buildingMarkers(List<Building> buildings) {
+    var set = <Marker>{};
 
     for (var b in buildings) {
-      set.add(Circle(
-        circleId: CircleId(b.id.toString()),
-        center: b.getPosition(),
-        radius: 16,
-        strokeWidth: 4,
-        strokeColor: colorForBuilding(b),
+      set.add(Marker(
+        markerId: MarkerId(b.id.toString()),
+        position: b.getPosition(),
       ));
     }
 
