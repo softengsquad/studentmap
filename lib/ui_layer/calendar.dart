@@ -4,6 +4,8 @@ import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
 import '/ui_layer/authentication.dart';
 
+/// Retrieves the user's UoP timetable from Google Calendar and
+/// displays it.
 class Calendar extends StatefulWidget {
   const Calendar({super.key});
 
@@ -72,6 +74,8 @@ class _Calendar extends State<Calendar> {
         });
   }
 
+  /// Attempts to find the UoP Timetable calendar from a list of
+  /// [CalendarListEntry.]
   String? findTimetableCalendar(List<CalendarListEntry> events) {
     for (var e in events) {
       // FIXME: This isn't a great way to identify which
@@ -86,6 +90,7 @@ class _Calendar extends State<Calendar> {
     return null;
   }
 
+  /// Constructs a basic timetable showing the events for current day.
   Widget timetable(List<Event> events) {
     DateFormat dayMonthFormatter = DateFormat("EEEE, d MMMM");
     DateFormat timeFormatter = DateFormat("Hm");
