@@ -17,7 +17,7 @@ class MapDrawer extends StatelessWidget {
 
     return Drawer(
       child: DefaultTabController(
-        length: 3,
+        length: 2,
         child: Scaffold(
           body: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
