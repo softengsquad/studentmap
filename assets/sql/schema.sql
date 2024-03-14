@@ -1,4 +1,4 @@
-CREATE TABLE building(
+CREATE TABLE IF NOT EXISTS building(
     building_id INTEGER PRIMARY KEY,
     name VARCHAR(32) NOT NULL,
     addressline1 VARCHAR(64) NOT NULL,
