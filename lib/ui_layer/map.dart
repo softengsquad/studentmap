@@ -1,9 +1,11 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart' show rootBundle;
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 import "/domain_layer/building_manager/building.dart";
 import "/data_layer/database.dart";
+import "/ui_layer/buildinginfo.dart";
 
 /// Describes an interactive map that is used to display buildings and routes.
 class InteractiveMap extends StatefulWidget {
@@ -26,6 +28,11 @@ class _InteractiveMap extends State<InteractiveMap> {
   Widget build(BuildContext context) {
     var db = context.read<Database>();
 
+    String? mapStyle;
+    rootBundle.loadString("assets/map_style.json").then((String style) {
+      mapStyle = style;
+    });
+
     return FutureBuilder(
         future: db.getAllBuildings(),
         builder:
@@ -36,6 +43,7 @@ class _InteractiveMap extends State<InteractiveMap> {
                 mapType: MapType.normal,
                 initialCameraPosition: _kGooglePlex,
                 markers: buildingMarkers(snapshot.data!),
+                style: mapStyle,
                 onMapCreated: (GoogleMapController controller) {
                   _controller.complete(controller);
                 },
@@ -54,12 +62,18 @@ class _InteractiveMap extends State<InteractiveMap> {
   /// Transfosms a list of buildings into a set of [Marker] to be drawn
   /// on the interactive map.
   Set<Marker> buildingMarkers(List<Building> buildings) {
+    var curBuildingInfo = context.read<CurrentBuildingInfo>();
     var set = <Marker>{};
 
     for (var b in buildings) {
       set.add(Marker(
         markerId: MarkerId(b.id.toString()),
         position: b.getPosition(),
+       consumeTapEvents: true,
+        onTap: () {
+          curBuildingInfo.building = b;
+          Scaffold.of(context).openDrawer();
+        }
       ));
     }
 

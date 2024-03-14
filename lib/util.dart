@@ -5,3 +5,16 @@ import "dart:io" show Platform;
 bool isTesting() {
   return Platform.environment.containsKey("FLUTTER_TEST");
 }
+
+/// "Prettifies" a postcode by inserting a space and making uppercase.
+String prettifyPostcode(String postcode) {
+  postcode = postcode.toUpperCase();
+
+  if (postcode.length <= 3) {
+    return postcode;
+  }
+
+  var i = postcode.length - 3;
+
+  return "${postcode.substring(0, i)} ${postcode.substring(i)}";
+}
