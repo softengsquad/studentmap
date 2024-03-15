@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import "/domain_layer/building_manager/building.dart";
 import "/util.dart";
 
@@ -19,6 +20,8 @@ class BuildingInfo extends StatelessWidget {
           child: Text("No building - tap a building to view its info."));
     }
 
+    CurrentBuildingInfo buildingInfo = context.read<CurrentBuildingInfo>();
+
     return Column(
       children: <Widget>[
         Text(building!.name),
@@ -27,6 +30,14 @@ class BuildingInfo extends StatelessWidget {
         ),
         Text("${building!.addressLine1}, ${building!.addressLine2}"),
         Text(prettifyPostcode(building!.postcode)),
+        IconButton(
+            icon: Icon(
+                building!.favourited ? Icons.favorite : Icons.favorite_border),
+            tooltip:
+                "${building!.favourited ? "Unfavourite" : "Favourite"} building",
+            onPressed: () {
+              buildingInfo.setFavouritedStatus(!building!.favourited);
+            }),
       ],
     );
   }
@@ -49,5 +60,24 @@ class CurrentBuildingInfo extends ChangeNotifier {
   /// Retrieve the stored [Building].
   Building? get building {
     return _building;
+  }
+
+  /// Updates the favourite status of the currently selected [Building].
+  void setFavouritedStatus(bool fave) {
+    Building b = _building!;
+
+    // Create a new Building object because the favourited field inside
+    // Building is final, so it cannot be modified.
+    building = Building(
+      id: b.id,
+      name: b.name,
+      addressLine1: b.addressLine1,
+      addressLine2: b.addressLine2,
+      postcode: b.postcode,
+      type: b.type,
+      favourited: fave,
+      longitude: b.longitude,
+      latitude: b.latitude,
+    );
   }
 }
