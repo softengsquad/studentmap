@@ -1,4 +1,5 @@
 import "package:flutter/services.dart" show rootBundle;
+import "package:flutter/foundation.dart" show kDebugMode;
 import "package:sqflite/sqflite.dart" as sqflite;
 import "../util.dart";
 import "/domain_layer/building_manager/building.dart";
@@ -15,7 +16,7 @@ class Database {
     var dbName = _getDatabaseName();
 
     // Start with a fresh database for each test case
-    if (isTesting()) {
+    if (isTesting() || kDebugMode) {
       await sqflite.deleteDatabase(dbName);
     }
 
@@ -106,4 +107,8 @@ class Database {
 
     return buildings;
   }
+
+  Future<void> updateFavouriteStatus(int id, bool fave) async =>
+      await _internalDb.update("building", {"favourited": fave ? 1 : 0},
+          where: "building_id = $id");
 }
