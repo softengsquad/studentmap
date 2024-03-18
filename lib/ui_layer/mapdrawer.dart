@@ -17,7 +17,7 @@ class MapDrawer extends StatelessWidget {
 
     return Drawer(
       child: DefaultTabController(
-        length: 2,
+        length: 3,
         child: Scaffold(
           body: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -27,6 +27,10 @@ class MapDrawer extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(vertical: 32),
                   child: BuildingInfo(currentBuildingInfo.building),
                 ),
+                const Padding(
+                    padding: EdgeInsets.symmetric(vertical: 16),
+                    child: Column(children: [
+                    ])),
                 const Padding(
                     padding: EdgeInsets.symmetric(vertical: 16),
                     child: Column(children: [
@@ -40,7 +44,8 @@ class MapDrawer extends StatelessWidget {
             bottom: const TabBar(
               tabs: [
                 Tab(icon: Icon(Icons.house)),
-                Tab(icon: Icon(Icons.calendar_month)),
+                Tab(icon: Icon(Icons.search)),
+                Tab(icon: Icon(Icons.calendar_month))
               ],
             ),
           ),
