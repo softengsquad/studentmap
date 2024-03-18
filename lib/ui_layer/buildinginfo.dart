@@ -46,7 +46,5 @@ class CurrentBuildingInfo extends ChangeNotifier {
   }
 
   /// Retrieve the stored [Building].
-  Building? get building {
-    return _building;
-  }
+  Building? get building => _building;
 }
