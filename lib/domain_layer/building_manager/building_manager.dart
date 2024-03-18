@@ -28,6 +28,6 @@ class BuildingManager {
         output.add(building);
       }
     }
-    return output.sublist(0, limit);
+    return output.sublist(0,  output.length > limit ? limit : output.length);
   }
 }
