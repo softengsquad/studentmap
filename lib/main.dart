@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
+import "package:studentmap/domain_layer/building_manager/building_manager.dart";
 import "/ui_layer/map.dart";
 import "/ui_layer/mapdrawer.dart";
 import "/ui_layer/buildinginfo.dart";
 import "/data_layer/database.dart";
-import 'package:provider/provider.dart';
 import "/ui_layer/authentication.dart";
 
 void main() {
@@ -41,6 +40,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     Database.open().then((v) {});
+    BuildingManager buildingManager = BuildingManager([]); // Holds information about buildings
 
     return MultiProvider(
       providers: [
@@ -56,14 +56,14 @@ class _MyHomePageState extends State<MyHomePage> {
           backgroundColor: Theme.of(context).colorScheme.inversePrimary,
           title: Text(widget.title),
         ),
-        drawer: const MapDrawer(),
+        drawer: MapDrawer(buildingManager),
         body: FutureBuilder<Database>(
             future: Database.open(),
             builder:
                 (BuildContext context, AsyncSnapshot<Database> snapshot) {
               if (snapshot.hasData) {
                 Database db = snapshot.data!;
-
+                buildingManager.importBuildings(db.getAllBuildings());
                 return Provider(
                     create: (_) => db,
                     child: const Center(

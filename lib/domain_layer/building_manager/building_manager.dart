@@ -9,6 +9,11 @@ class BuildingManager {
 
   BuildingManager(this.buildings);
 
+
+  void importBuildings(Future<List<Building>> newBuildings) async{
+    buildings = await newBuildings;
+  }
+
   /// Returns buildings that contain a search term
   /// defined in  **Input**.
   List<Building> getMatchingBuildingsByName(String? input, {int limit = 10}) {

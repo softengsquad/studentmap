@@ -1,6 +1,8 @@
 import "package:flutter/material.dart";
 import "package:googleapis/chat/v1.dart";
 import 'package:provider/provider.dart';
+import "package:studentmap/domain_layer/building_manager/building.dart";
+import "package:studentmap/domain_layer/building_manager/building_manager.dart";
 import "/ui_layer/authentication.dart";
 import "/ui_layer/buildinginfo.dart";
 import "/ui_layer/calendar.dart";
@@ -10,7 +12,9 @@ import "/ui_layer/calendar.dart";
 /// Displays various information such as the [GoogleSignInButton] and
 /// current [BuildingInfo].
 class MapDrawer extends StatelessWidget {
-  const MapDrawer({super.key});
+  MapDrawer(this.manager, {super.key});
+
+  BuildingManager manager;
 
   @override
   Widget build(BuildContext context) {
@@ -36,11 +40,17 @@ class MapDrawer extends StatelessWidget {
                     child: Column(children: [
                       TextField(
                         controller: controller,
-                        decoration:
-                            const InputDecoration(labelText: "Search for a building"),
+                        decoration: const InputDecoration(
+                            labelText: "Search for a building"),
                       ),
                       ElevatedButton(
-                        onPressed: () {print(controller.text);},
+                        onPressed: () {
+                          List<Building> buildings = manager.getMatchingBuildingsByName(controller.text);
+                          
+                          for (Building building in buildings) {
+                            print(building.getName());
+                          }
+                        },
                         child: const Text("Search"),
                       ),
                     ])),
