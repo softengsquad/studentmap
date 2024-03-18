@@ -4,13 +4,13 @@ import "package:studentmap/domain_layer/building_manager/building_manager.dart";
 import "package:studentmap/ui_layer/sidebar/tabs/building_info_tab.dart";
 import "package:studentmap/ui_layer/sidebar/tabs/calendar_tab.dart";
 import "package:studentmap/ui_layer/sidebar/tabs/search_tab.dart";
-import "/ui_layer/authentication.dart";
-import "/ui_layer/buildinginfo.dart";
+import "../widgets/buildinginfo.dart";
 
 /// The drawer interface that appears at the left side of the screen.
 ///
 /// Displays various information such as the [GoogleSignInButton] and
 /// current [BuildingInfo].
+// ignore: must_be_immutable
 class MapDrawer extends StatelessWidget {
   MapDrawer(this.manager, {super.key});
 

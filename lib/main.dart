@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import "package:studentmap/domain_layer/building_manager/building_manager.dart";
+import "package:studentmap/ui_layer/authentication/google_auth.dart";
+import "package:studentmap/ui_layer/widgets/buildinginfo.dart";
 import "/ui_layer/map.dart";
 import "ui_layer/sidebar/map_drawer.dart";
-import "/ui_layer/buildinginfo.dart";
 import "/data_layer/database.dart";
-import "/ui_layer/authentication.dart";
 
 void main() {
   runApp(const MyApp());

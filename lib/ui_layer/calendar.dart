@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:googleapis/calendar/v3.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
-import '/ui_layer/authentication.dart';
+import 'package:studentmap/ui_layer/authentication/google_auth.dart';
 
 /// Retrieves the user's UoP timetable from Google Calendar and
 /// displays it.

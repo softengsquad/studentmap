@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:studentmap/ui_layer/buildinginfo.dart';
+import 'package:studentmap/ui_layer/widgets/buildinginfo.dart';
+
 
 /// This tab holds information about the currently selected building
 /// Takes a [Building] object and displays its information.

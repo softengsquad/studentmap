@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:studentmap/ui_layer/widgets/buildinginfo.dart';
 import "/domain_layer/building_manager/building.dart";
 import "/data_layer/database.dart";
-import "/ui_layer/buildinginfo.dart";
 
 /// Describes an interactive map that is used to display buildings and routes.
 class InteractiveMap extends StatefulWidget {
@@ -67,14 +67,13 @@ class _InteractiveMap extends State<InteractiveMap> {
 
     for (var b in buildings) {
       set.add(Marker(
-        markerId: MarkerId(b.id.toString()),
-        position: b.getPosition(),
-       consumeTapEvents: true,
-        onTap: () {
-          curBuildingInfo.building = b;
-          Scaffold.of(context).openDrawer();
-        }
-      ));
+          markerId: MarkerId(b.id.toString()),
+          position: b.getPosition(),
+          consumeTapEvents: true,
+          onTap: () {
+            curBuildingInfo.building = b;
+            Scaffold.of(context).openDrawer();
+          }));
     }
 
     return set;
