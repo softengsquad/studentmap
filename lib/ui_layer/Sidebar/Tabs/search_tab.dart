@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:studentmap/domain_layer/building_manager/building.dart';
 import 'package:studentmap/domain_layer/building_manager/building_manager.dart';
@@ -25,7 +26,9 @@ class SearchTab extends StatelessWidget {
                   manager.getMatchingBuildingsByName(controller.text);
 
               for (Building building in buildings) {
-                print(building.getName());
+                if (kDebugMode) {
+                  print(building.getName());
+                }
               }
             },
             child: const Text("Search"),
