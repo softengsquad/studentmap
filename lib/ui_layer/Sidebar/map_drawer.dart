@@ -1,9 +1,9 @@
 import "package:flutter/material.dart";
 import 'package:provider/provider.dart';
 import "package:studentmap/domain_layer/building_manager/building_manager.dart";
-import "package:studentmap/ui_layer/Sidebar/Tabs/building_info_tab.dart";
-import "package:studentmap/ui_layer/Sidebar/Tabs/calendar_tab.dart";
-import "package:studentmap/ui_layer/Sidebar/Tabs/search_tab.dart";
+import "package:studentmap/ui_layer/sidebar/tabs/building_info_tab.dart";
+import "package:studentmap/ui_layer/sidebar/tabs/calendar_tab.dart";
+import "package:studentmap/ui_layer/sidebar/tabs/search_tab.dart";
 import "/ui_layer/authentication.dart";
 import "/ui_layer/buildinginfo.dart";
 

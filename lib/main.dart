@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import "package:studentmap/domain_layer/building_manager/building_manager.dart";
 import "/ui_layer/map.dart";
-import "ui_layer/Sidebar/mapdrawer.dart";
+import "ui_layer/sidebar/map_drawer.dart";
 import "/ui_layer/buildinginfo.dart";
 import "/data_layer/database.dart";
 import "/ui_layer/authentication.dart";
