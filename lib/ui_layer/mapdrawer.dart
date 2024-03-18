@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import "package:googleapis/chat/v1.dart";
 import 'package:provider/provider.dart';
 import "/ui_layer/authentication.dart";
 import "/ui_layer/buildinginfo.dart";
@@ -14,6 +15,7 @@ class MapDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var currentBuildingInfo = context.watch<CurrentBuildingInfo>();
+    final TextEditingController controller = TextEditingController();
 
     return Drawer(
       child: DefaultTabController(
@@ -23,14 +25,27 @@ class MapDrawer extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: TabBarView(
               children: [
+                // Building info
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 32),
                   child: BuildingInfo(currentBuildingInfo.building),
                 ),
-                const Padding(
-                    padding: EdgeInsets.symmetric(vertical: 16),
+                // Search
+                Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 16),
                     child: Column(children: [
+                      TextField(
+                        controller: controller,
+                        decoration:
+                            const InputDecoration(labelText: "Search for a building"),
+                      ),
+                      ElevatedButton(
+                        onPressed: () {print(controller.text);},
+                        child: const Text("Search"),
+                      ),
                     ])),
+
+                // Calendar
                 const Padding(
                     padding: EdgeInsets.symmetric(vertical: 16),
                     child: Column(children: [
