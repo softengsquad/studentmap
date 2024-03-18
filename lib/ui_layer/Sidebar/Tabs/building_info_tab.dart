@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:studentmap/ui_layer/buildinginfo.dart';
 
+/// This tab holds information about the currently selected building
+/// Takes a [Building] object and displays its information.
 class BuildingInfoTab extends StatelessWidget {
-  const BuildingInfoTab(this.currentBuildingInfo,{super.key});
+  const BuildingInfoTab(this.currentBuildingInfo, {super.key});
 
   final CurrentBuildingInfo currentBuildingInfo;
 

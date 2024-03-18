@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:studentmap/ui_layer/authentication.dart';
 import 'package:studentmap/ui_layer/calendar.dart';
 
+/// This tab holds the calendar for the user
+/// Displays the [GoogleSignInButton] and the [Calendar] widget
 class CalendarTab extends StatelessWidget {
   const CalendarTab({super.key});
 

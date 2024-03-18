@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:studentmap/domain_layer/building_manager/building.dart';
 import 'package:studentmap/domain_layer/building_manager/building_manager.dart';
 
+/// This tab allows the user to search for a building by name
+/// Takes a [TextEditingController] and a [BuildingManager] object
 class SearchTab extends StatelessWidget {
-  const SearchTab(this.controller,this.manager, {super.key});
+  const SearchTab(this.controller, this.manager, {super.key});
 
   final TextEditingController controller;
   final BuildingManager manager;
