@@ -1,6 +1,6 @@
 /// The OAuth 2.0 Client ID given by Google Cloud.
 const String clientId =
-    "354034818654-ngj5kfhaq8n4j4ou3ok265t0q37c4a8h.apps.googleusercontent.com";
+    "354034818654-ssi4dvpldjuam5ai9fvejvmrmme440ve.apps.googleusercontent.com";
 
 /// The list of scopes that will be granted to the application
 /// once the user authenticates with Google. This must align with
