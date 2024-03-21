@@ -60,7 +60,7 @@ android {
     }
 
    signingConfigs {
-       release {
+       debug {
            keyAlias keystoreProperties['keyAlias']
            keyPassword keystoreProperties['keyPassword']
            storeFile keystoreProperties['storeFile'] ? file(keystoreProperties['storeFile']) : null
@@ -69,7 +69,7 @@ android {
    }
    buildTypes {
        release {
-           signingConfig signingConfigs.release
+           signingConfig signingConfigs.debug
        }
    }
 }

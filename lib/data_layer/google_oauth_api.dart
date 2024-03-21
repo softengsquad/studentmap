@@ -2,8 +2,7 @@
 const String clientId =
     "354034818654-ssi4dvpldjuam5ai9fvejvmrmme440ve.apps.googleusercontent.com";
 
-/// The list of scopes that will be granted to the application
-/// once the user authenticates with Google. This must align with
+/// The list of scopes that will be granted to the application / once the user authenticates with Google. This must align with
 /// the scopes defined in the OAuth settings in the Google Cloud API Console.
 const List<String> scopes = <String>[
   "email",
