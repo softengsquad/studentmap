@@ -17,7 +17,7 @@ class _GoogleSignInButton extends State<GoogleSignInButton> {
   GoogleSignInAccount? _currentUser;
 
   final GoogleSignIn _googleSignIn = GoogleSignIn(
-    serverClientId: getClientId(),
+    clientId: getClientId(),
     scopes: getScopes(),
   );
 
