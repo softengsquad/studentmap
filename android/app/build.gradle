@@ -23,9 +23,8 @@ if (flutterVersionName == null) {
     flutterVersionName = '1.0'
 }
 
-// Configure signing with release key
 def keystoreProperties = new Properties()
-def keystorePropertiesFile = rootProject.file('key.properties')
+def keystorePropertiesFile = rootProject.file('debug_key.properties')
 if (keystorePropertiesFile.exists()) {
    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 }
@@ -60,7 +59,7 @@ android {
     }
 
    signingConfigs {
-       release {
+       debug {
            keyAlias keystoreProperties['keyAlias']
            keyPassword keystoreProperties['keyPassword']
            storeFile keystoreProperties['storeFile'] ? file(keystoreProperties['storeFile']) : null
@@ -69,7 +68,7 @@ android {
    }
    buildTypes {
        release {
-           signingConfig signingConfigs.release
+           signingConfig signingConfigs.debug
        }
    }
 }
