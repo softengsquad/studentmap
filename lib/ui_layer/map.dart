@@ -67,14 +67,13 @@ class _InteractiveMap extends State<InteractiveMap> {
 
     for (var b in buildings) {
       set.add(Marker(
-        markerId: MarkerId(b.id.toString()),
-        position: b.getPosition(),
-       consumeTapEvents: true,
-        onTap: () {
-          curBuildingInfo.building = b;
-          Scaffold.of(context).openDrawer();
-        }
-      ));
+          markerId: MarkerId(b.id.toString()),
+          position: b.getPosition(),
+          consumeTapEvents: true,
+          onTap: () {
+            curBuildingInfo.building = b;
+            Scaffold.of(context).openDrawer();
+          }));
     }
 
     return set;

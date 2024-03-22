@@ -5,6 +5,8 @@ import "/ui_layer/map.dart";
 import "/ui_layer/mapdrawer.dart";
 import "/ui_layer/buildinginfo.dart";
 import "/data_layer/database.dart";
+import 'package:provider/provider.dart';
+import "/ui_layer/authentication.dart";
 
 void main() {
   runApp(const MyApp());
@@ -40,8 +42,15 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     Database.open().then((v) {});
 
-    return ChangeNotifierProvider<CurrentBuildingInfo>(
-        create: (_) => CurrentBuildingInfo(),
+    return MultiProvider(
+        providers: [
+          ChangeNotifierProvider(
+            create: (_) => CurrentBuildingInfo(),
+          ),
+          ChangeNotifierProvider(
+            create: (_) => GoogleAuth(),
+          )
+        ],
         child: Scaffold(
             appBar: AppBar(
               backgroundColor: Theme.of(context).colorScheme.inversePrimary,
